@@ -1,0 +1,46 @@
+{
+  "users": [
+    {
+      "name": "service_user",
+      "password": "admin123",
+      "tags": ""
+    },
+    {
+      "name": "admin",
+      "password": "admin123",
+      "tags": "administrator"
+    }
+  ],
+  "vhosts": [
+    {
+      "name": "powertube"
+    }
+  ],
+  "permissions": [
+    {
+      "user": "admin",
+      "vhost": "powertube",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    },
+    {
+      "user": "service_user",
+      "vhost": "powertube",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    }
+  ],
+  "policies": [
+    {
+      "vhost": "powertube",
+      "name": "ha-policy",
+      "pattern": ".*",
+      "definition": {
+        "ha-mode": "all",
+        "ha-sync-mode": "automatic"
+      }
+    }
+  ]
+}
