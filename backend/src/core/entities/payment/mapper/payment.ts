@@ -1,8 +1,7 @@
-import { Payment } from 'core/entities/payment/payment.entity'
-import { TPaymentClient } from '../types/payment.entities'
+import { Payment, PaymentClient } from 'core/entities/payment/payment.entity'
 
 export class PaymentMapper {
-    static toClientFormat(payment: Payment): TPaymentClient {
+    static toClientFormat(payment: Payment): PaymentClient {
         return {
             id: payment.id,
             status: payment.status,

@@ -1,14 +1,11 @@
-import {
-    EnumPaymentStatus,
-    EnumSubscriptionPeriod,
-    EnumSubscriptionStatus,
-    TPayment,
-    TPaymentMethod,
-    TSubscription,
-    TSubscriptionTariff,
-} from 'core/entities/payment/types/payment.entities'
+import { EnumPaymentStatus, EnumSubscriptionPeriod, EnumSubscriptionStatus, TSubscriptionTariff } from './types/payment.types'
 
-export class Payment implements TPayment {
+import { TPaymentMethod } from './types/payment.types'
+
+
+
+
+export class Payment {
     id: string
     transactionId: string
     userId: string
@@ -28,7 +25,7 @@ export class Payment implements TPayment {
         period,
         details,
         tariff,
-    }: TPayment) {
+    }: Payment) {
         this.id = id
         this.transactionId = transactionId
         this.userId = userId
@@ -41,11 +38,34 @@ export class Payment implements TPayment {
     }
 }
 
-export class Subscription implements TSubscription {
+export class Subscription {
     status: EnumSubscriptionStatus
     payments: Payment[]
-    constructor(dataSub: TSubscription) {
+    constructor(dataSub: Subscription) {
         this.status = dataSub.status
         this.payments = dataSub.payments.map((payment) => new Payment(payment))
+    }
+}
+
+
+export class PaymentClient implements Pick<
+    Payment,
+    'id' | 'status' | 'createdAt' | 'period' | 'method' | 'details'
+> {
+    id: string
+    status: EnumPaymentStatus
+    createdAt: number
+    period: EnumSubscriptionPeriod
+    method: TPaymentMethod
+    details: string | null
+
+
+    constructor(data: PaymentClient) {
+        this.id = data.id
+        this.status = data.status
+        this.createdAt = data.createdAt
+        this.period = data.period
+        this.method = data.method
+        this.details = data.details
     }
 }

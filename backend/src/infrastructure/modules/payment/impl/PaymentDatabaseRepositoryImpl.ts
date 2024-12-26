@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
+import { Payment } from 'core/entities/payment/payment.entity'
 import { PaymentDatabaseRepository } from 'core/entities/payment/payment.repository'
-import { TPayment } from 'core/entities/payment/types/payment.entities'
 import { TypeormLib } from 'infrastructure/libs/typeorm/typeorm.libs'
 import { Repository } from 'typeorm'
 import { PaymentDB } from '../db/payment.typeorm'
@@ -10,7 +10,7 @@ import { PaymentDB } from '../db/payment.typeorm'
 export class PaymentDatabaseRepositoryImpl implements PaymentDatabaseRepository {
     constructor(
         @InjectRepository(PaymentDB)
-        private readonly paymentDB: Repository<TPayment>,
+        private readonly paymentDB: Repository<Payment>,
     ) { }
     getAll: PaymentDatabaseRepository['getAll'] = async () => {
         const paymentsList = await this.paymentDB.find()

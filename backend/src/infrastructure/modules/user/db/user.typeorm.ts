@@ -1,9 +1,10 @@
-import { EnumUserRole, TUser } from 'core/entities/user/types/user.entities'
+import { EnumUserRole } from 'core/entities/user/types/user.types'
+import { User } from 'core/entities/user/user.entity'
 import { EntitySchemaTyped, TypeormLib } from 'infrastructure/libs/typeorm/typeorm.libs'
 import { SubscriptionDB } from 'infrastructure/modules/payment/db/payment.typeorm'
 import { ProxyDB } from 'infrastructure/modules/proxy/db/proxy.typeorm'
 
-export const UserDB = new EntitySchemaTyped<TUser, 'subscription' | 'proxy'>({
+export const UserDB = new EntitySchemaTyped<User, 'subscription' | 'proxy'>({
     name: 'User', // Имя сущности
     tableName: 'users', // Опционально, если имя таблицы отличается
     columns: {

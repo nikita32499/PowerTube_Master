@@ -1,9 +1,9 @@
 import { AuthRepository, IAuthService } from 'core/entities/auth/auth.repository'
 
-import { EnumSubscriptionStatus } from 'core/entities/payment/types/payment.entities'
-import { EnumUserRole } from 'core/entities/user/types/user.entities'
+import { EnumSubscriptionStatus } from 'core/entities/payment/types/payment.types'
+import { UserLib } from 'core/entities/user/helper/user'
 import { TUserCreate } from 'core/entities/user/types/user.operations'
-import { UserLib } from 'core/lib/user'
+import { EnumUserRole } from 'core/entities/user/types/user.types'
 import { UserService } from './UserService'
 
 export class AuthService implements IAuthService {

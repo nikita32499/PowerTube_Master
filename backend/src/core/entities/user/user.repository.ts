@@ -1,38 +1,36 @@
-import { EnumUserRole } from 'core/entities/user/types/user.entities'
 import { TUserCreate, TUserSetAuth } from 'core/entities/user/types/user.operations'
+import { EnumUserRole } from 'core/entities/user/types/user.types'
 import { User } from 'core/entities/user/user.entity'
 
 
 
 
-export type IUserService = PromisifyMethods<
+export type IUserService =
     {
-        create(data: TUserCreate['Entity']): User
+        create(data: TUserCreate['Entity']): Promise<User>
 
-        updateLastAt(userId: User['id']): boolean
+        updateLastAt(userId: User['id']): Promise<boolean>
 
         // setAuth(data: TAuthOperation['DtoAuthSetAuth']): boolean;
 
         // setEmail(data: TUserSetEmail['Request']): boolean;
 
-        setAuth(userId: User['id'], data: TUserSetAuth['Request']): boolean
+        setAuth(userId: User['id'], data: TUserSetAuth['Request']): Promise<boolean>
 
-        setRole(userID: User['id'], role: EnumUserRole): boolean
+        setRole(userID: User['id'], role: EnumUserRole): Promise<boolean>
 
-        cancelJwt(userId: User['id']): boolean
+        cancelJwt(userId: User['id']): Promise<boolean>
 
-        delete(userId: User['id']): boolean
+        delete(userId: User['id']): Promise<boolean>
 
-        getByEmail(email: User['email']): User
+        getByEmail(email: User['email']): Promise<User>
 
-        getById(userId: User['id']): User
+        getById(userId: User['id']): Promise<User>
 
-        getAll(): User[]
+        getAll(): Promise<User[]>
 
         getUserAccessLevel(userId: User['id']): UserAccessLevel
-    },
-    'getUserAccessLevel'
->
+    }
 
 
 export type UserAccessLevel = { role: EnumUserRole; jwtVersion: number }

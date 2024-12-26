@@ -4,23 +4,25 @@ import {
     PaymentApiRepository,
     PaymentDatabaseRepository,
 } from 'core/entities/payment/payment.repository'
+import { TPaymentCreate } from 'core/entities/payment/types/payment.operations'
 import {
     EnumPaymentStatus,
     EnumSubscriptionTariffPrice,
-    TPayment,
-} from 'core/entities/payment/types/payment.entities'
-import { TPaymentCreate } from 'core/entities/payment/types/payment.operations'
-import { TUser } from 'core/entities/user/types/user.entities'
+} from 'core/entities/payment/types/payment.types'
+import { User } from 'core/entities/user/user.entity'
 import { UserService } from './UserService'
 
 export class PaymentService implements IPaymentService {
-    permissionsMap: Record<TUser['id'], TPayment['id'][]> = {};
+    permissionsMap: Record<User['id'], Payment['id'][]> = {};
 
     constructor(
         private readonly userService: UserService,
         private readonly paymentDatabaseRepository: PaymentDatabaseRepository,
         private readonly paymentApiRepository: PaymentApiRepository,
     ) { }
+
+
+
 
     hasPermission: IPaymentService['hasPermission'] = (userId, paymentId) => {
         return this.permissionsMap[userId]?.includes(paymentId) ?? false

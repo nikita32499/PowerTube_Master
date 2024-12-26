@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { EnumUserRole, TUser } from 'core/entities/user/types/user.entities'
 import { TUserCreate } from 'core/entities/user/types/user.operations'
+import { EnumUserRole } from 'core/entities/user/types/user.types'
 import { User } from 'core/entities/user/user.entity'
 import { UserDatabaseRepository } from 'core/entities/user/user.repository'
 import { TypeormLib } from 'infrastructure/libs/typeorm/typeorm.libs'
@@ -11,12 +11,12 @@ import { UserMapper } from '../mapper/UserMapper'
 
 @Injectable()
 export class UserRepositoryImpl implements UserDatabaseRepository {
-    usersAccessLevel: Record<TUser['id'], { role: EnumUserRole; jwtVersion: number }> =
+    usersAccessLevel: Record<User['id'], { role: EnumUserRole; jwtVersion: number }> =
         {};
 
     constructor(
         @InjectRepository(UserDB)
-        private readonly userDB: Repository<TUser>,
+        private readonly userDB: Repository<User>,
     ) {
         this.updateUserAccessLevel()
     }

@@ -1,13 +1,13 @@
-import { TUser, TUserClient } from '../types/user.entities';
+import { User, UserClient } from '../user.entity'
 
 export class UserMapper {
-    static toClientFormat(user: TUser): TUserClient {
+    static toClientFormat(user: User): UserClient {
         return {
             id: user.id,
             createdAt: user.createdAt,
             lastAt: user.lastAt,
             subscription: user.subscription,
             proxy: user.proxy,
-        };
+        }
     }
 }

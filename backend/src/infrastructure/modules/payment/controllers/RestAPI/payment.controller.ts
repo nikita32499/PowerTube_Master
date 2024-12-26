@@ -10,9 +10,8 @@ import {
 } from '@nestjs/common'
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger'
 import { PaymentMapper } from 'core/entities/payment/mapper/payment'
-import { Payment } from 'core/entities/payment/payment.entity'
-import { TPaymentClient } from 'core/entities/payment/types/payment.entities'
-import { EnumUserRole } from 'core/entities/user/types/user.entities'
+import { Payment, PaymentClient } from 'core/entities/payment/payment.entity'
+import { EnumUserRole } from 'core/entities/user/types/user.types'
 import { Request } from 'express'
 import { GetUserId, SetPermissions } from 'infrastructure/libs/decorators/controller'
 import {
@@ -77,7 +76,7 @@ export class PaymentController {
     async getById(
         @Req() req: Request,
         @Param('paymentId', new ValidationPipe()) paymentId: string,
-    ): Promise<TPaymentClient> {
+    ): Promise<PaymentClient> {
         const userId = String(req.userJwtData?.userId)
 
         const hasPermission = this.paymentService.hasPermission(userId, paymentId)

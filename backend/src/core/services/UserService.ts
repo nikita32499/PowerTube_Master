@@ -1,6 +1,5 @@
 import { User } from 'core/entities/user/user.entity'
-import { IUserService } from 'core/entities/user/user.repository'
-import { UserDatabaseRepository } from '../entities/user/user.repository'
+import { IUserService, UserDatabaseRepository } from 'core/entities/user/user.repository'
 
 export class UserService implements IUserService {
     constructor(
@@ -8,15 +7,21 @@ export class UserService implements IUserService {
         // private readonly logger: LoggerRepository,
     ) { }
 
+    create: IUserService['create'] = (data) => {
+        const newUser = this.userDatabaseRepository.create(data)
+
+        this.userDatabaseRepository.updateUserAccessLevel()
+
+        return newUser
+    };
+
     getAll: IUserService['getAll'] = () => {
         return this.userDatabaseRepository.getAll()
     };
     getById: IUserService['getById'] = (id) => {
         return this.userDatabaseRepository.getOne({ id })
     };
-    getByEmail: IUserService['getByEmail'] = (email) => {
-        return this.userDatabaseRepository.getOne({ email })
-    };
+
     delete: IUserService['delete'] = (id) => {
         return this.userDatabaseRepository.delete(id)
     };
@@ -50,12 +55,10 @@ export class UserService implements IUserService {
         return this.userDatabaseRepository.update(id, { lastAt: Date.now() })
     };
 
-    create: IUserService['create'] = (data) => {
-        const newUser = this.userDatabaseRepository.create(data)
 
-        this.userDatabaseRepository.updateUserAccessLevel()
 
-        return newUser
+    getByEmail: IUserService['getByEmail'] = (email) => {
+        return this.userDatabaseRepository.getOne({ email })
     };
 
     getUserAccessLevel: IUserService['getUserAccessLevel'] = (id) => {

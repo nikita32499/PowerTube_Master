@@ -1,5 +1,5 @@
 import { PaymentApiRepository } from 'core/entities/payment/payment.repository'
-import { EnumPaymentStatus } from 'core/entities/payment/types/payment.entities'
+import { EnumPaymentStatus } from 'core/entities/payment/types/payment.types'
 
 export class PaymentApiImpl implements PaymentApiRepository {
     initializePayment: PaymentApiRepository['initializePayment'] = async (payment) => {

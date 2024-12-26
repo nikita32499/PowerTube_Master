@@ -1,44 +1,43 @@
 import { Payment } from 'core/entities/payment/payment.entity'
-import { TPayment } from 'core/entities/payment/types/payment.entities'
 import { TPaymentCreate } from 'core/entities/payment/types/payment.operations'
+import { User } from '../user/user.entity'
 
 
 
-import { TUser } from 'core/entities/user/types/user.entities'
 
 export type IPaymentService = {
-    permissionsMap: Record<TUser['id'], TPayment['id'][]>
+    permissionsMap: Record<User['id'], Payment['id'][]>
 
-    hasPermission(userId: TUser['id'], paymentId: TPayment['id']): boolean
+    hasPermission(userId: User['id'], paymentId: Payment['id']): boolean
 
     getAll(): Promise<Payment[]>
 
     startPayment(data: TPaymentCreate['Request']): Promise<Payment>
 
-    getByPaymentId(paymentId: TPayment['id']): Promise<Payment>
+    getByPaymentId(paymentId: Payment['id']): Promise<Payment>
 
-    getPendingPaymentByUserId(userId: TUser['id']): Promise<Payment[]>
+    getPendingPaymentByUserId(userId: User['id']): Promise<Payment[]>
 
-    cancelPayment(paymentId: TPayment['id']): Promise<boolean>
+    cancelPayment(paymentId: Payment['id']): Promise<boolean>
 }
 
 
 export type PaymentDatabaseRepository = PromisifyMethods<{
     getAll(): Payment[]
 
-    getById(paymentId: TPayment['id']): Payment
+    getById(paymentId: Payment['id']): Payment
 
     create(newPayment: TPaymentCreate['Entity']): Payment
 
-    update(id: TPayment['id'], update: Pick<TPayment, 'details' | 'status'>): boolean
+    update(id: Payment['id'], update: Pick<Payment, 'details' | 'status'>): boolean
 
-    delete(id: TPayment['id']): boolean
+    delete(id: Payment['id']): boolean
 }>
 
 export type PaymentApiRepository = PromisifyMethods<{
     initializePayment(payment: TPaymentCreate['Entity']): TPaymentCreate['Entity']
 
-    checkPayment(id: TPayment['id']): TPayment['status']
+    checkPayment(id: Payment['id']): Payment['status']
 
-    cancelPayment(id: TPayment['id']): boolean
+    cancelPayment(id: Payment['id']): boolean
 }>

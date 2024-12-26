@@ -1,5 +1,6 @@
 import { z } from 'zod'
 
+
 import { Exactly, ZodSafe } from 'core/lib/zod/zod'
 import {
     EnumEnumPaymentType,
@@ -7,10 +8,12 @@ import {
     EnumPaymentStatus,
     EnumSubscriptionPeriod,
     EnumSubscriptionTariffPrice,
-    TPayment,
-    TPaymentClient,
-    TSubscriptionTariff,
-} from '../types/payment.entities'
+
+    TSubscriptionTariff
+} from '../types/payment.types'
+
+
+import { Payment, PaymentClient } from '../payment.entity'
 
 export const SchemaSubscriptionTariff = ZodSafe(
     z.discriminatedUnion('period', [
@@ -56,7 +59,7 @@ export const SchemaPayment = ZodSafe(
         period: z.nativeEnum(EnumSubscriptionPeriod),
         details: z.union([z.string(), z.null()]),
     }),
-).infer<Exactly<TPayment>>()
+).infer<Exactly<Payment>>()
 
 export const SchemaPaymentClient = ZodSafe(
     SchemaPayment.pick({
@@ -67,4 +70,4 @@ export const SchemaPaymentClient = ZodSafe(
         method: true,
         details: true,
     }),
-).infer<Exactly<TPaymentClient>>()
+).infer<Exactly<PaymentClient>>()

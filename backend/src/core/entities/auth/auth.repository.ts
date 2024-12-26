@@ -1,5 +1,5 @@
-import { TUserJwtData } from '../user/types/user.entities'
-import { User } from '../user/user.entity'
+
+import { User, UserJwtData } from '../user/user.entity'
 import { TAuthLogin, TAuthRegisterWithPassword } from './types/auth.operations'
 
 
@@ -12,9 +12,9 @@ export type IAuthService = {
 
     register(): Promise<User>
 
-    createUserToken(data: TUserJwtData): Promise<string>
+    createUserToken(data: UserJwtData): Promise<string>
 
-    validateToken(token: string): TUserJwtData | null
+    validateToken(token: string): UserJwtData | null
 }
 
 export type AuthRepository = {
@@ -22,7 +22,7 @@ export type AuthRepository = {
 
     comparePassword(password: string, passwordHash: string): Promise<boolean>
 
-    createUserToken(data: TUserJwtData): Promise<string>
+    createUserToken(data: UserJwtData): Promise<string>
 
-    validateToken(token: string): TUserJwtData | null
+    validateToken(token: string): UserJwtData | null
 }

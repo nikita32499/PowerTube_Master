@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common'
 import * as bcrypt from 'bcrypt'
 import { AuthRepository } from 'core/entities/auth/auth.repository'
-import { TUserJwtData } from 'core/entities/user/types/user.entities'
+import { SchemaUserJwtData } from 'core/entities/user/schema/user.schema'
+import { UserJwtData } from 'core/entities/user/user.entity'
 import { Config } from 'infrastructure/libs/config'
 import * as jwt from 'jsonwebtoken'
 
@@ -16,7 +17,7 @@ export class AuthRepositoryImpl implements AuthRepository {
         return await bcrypt.hash(password, salt)
     }
 
-    async createUserToken(data: TUserJwtData): Promise<string> {
+    async createUserToken(data: UserJwtData): Promise<string> {
         return jwt.sign(data, Config.JWT_SECRET_KEY, {
             expiresIn: '24h',
             algorithm: 'RS256',
@@ -26,7 +27,7 @@ export class AuthRepositoryImpl implements AuthRepository {
     validateToken: AuthRepository['validateToken'] = (token: string) => {
         try {
             const decoded = jwt.verify(token, Config.JWT_SECRET_KEY, { complete: true })
-            return decoded.payload as TUserJwtData
+            return SchemaUserJwtData.parse(decoded.payload)
         } catch {
             return null
         }

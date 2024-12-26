@@ -1,10 +1,13 @@
-import { TSubscription } from 'core/entities/payment/types/payment.entities'
-import { TProxy } from 'core/entities/proxy/types/proxy.entities'
-import { EnumUserRole, TUser } from 'core/entities/user/types/user.entities'
-import { Subscription } from '../payment/payment.entity'
-import { Proxy } from '../proxy/proxy.entity'
+import { Subscription } from 'core/entities/payment/payment.entity'
+import { Proxy } from 'core/entities/proxy/proxy.entity'
 
-export class User implements TUser {
+import { EnumUserRole } from './types/user.types'
+
+
+
+
+
+export class User {
     id: string
     authId: string
     passwordHash: string | null
@@ -13,11 +16,11 @@ export class User implements TUser {
     jwtVersion: number
     lastAt: number | null
     createdAt: number
-    subscription: TSubscription
-    proxy: TProxy | null
+    subscription: Subscription
+    proxy: Proxy | null
     active: boolean
 
-    constructor(userData: TUser) {
+    constructor(userData: User) {
         this.id = userData.id
         this.authId = userData.authId
         this.email = userData.email
@@ -31,3 +34,36 @@ export class User implements TUser {
         this.active = userData.active
     }
 }
+
+
+export class UserJwtData {
+    userId: User['id']
+    version: number
+
+
+    constructor(userData: UserJwtData) {
+        this.userId = userData.userId
+        this.version = userData.version
+    }
+}
+
+export class UserClient implements Pick<
+    User,
+    'id' | 'createdAt' | 'lastAt' | 'subscription' | 'proxy'
+> {
+    id: string
+    createdAt: number
+    lastAt: number | null
+    subscription: Subscription
+    proxy: Proxy | null
+
+
+    constructor(userData: UserClient) {
+        this.id = userData.id
+        this.createdAt = userData.createdAt
+        this.lastAt = userData.lastAt
+        this.subscription = userData.subscription
+        this.proxy = userData.proxy
+    }
+}
+

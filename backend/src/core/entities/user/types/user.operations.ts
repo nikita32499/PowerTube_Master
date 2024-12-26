@@ -1,19 +1,19 @@
 import { TResponse } from 'core/lib/response.types'
-import { TUser, TUserClient } from './user.entities'
+import { User, UserClient } from '../user.entity'
 
 export type TUserCreate = {
-    Request: P<Pick<TUser, 'email'> & { password: string | null }>
-    Entity: Omit<TUser, 'id'>
+    Request: P<Pick<User, 'email'> & { password: string | null }>
+    Entity: Omit<User, 'id'>
     Response: P<
         TResponse<{
-            user: TUserClient
+            user: UserClient
         }>
     >
 }
 
 export type TUserSetEmail = {
-    Request: P<Pick<TUser, 'email' | 'id'>>
-    Response: P<TResponse<{ user: TUserClient }>>
+    Request: P<Pick<User, 'email' | 'id'>>
+    Response: P<TResponse<{ user: UserClient }>>
 }
 
 export type TUserSetAuth = {

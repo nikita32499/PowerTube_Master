@@ -1,3 +1,3 @@
-import { TUser } from '../../user/types/user.entities';
+// import { TUser } from '../../user/types/user.entities';
 
-export type TAuthRegister = Pick<TUser, 'role'>;
+// export type TAuthRegister = Pick<TUser, 'role'>;

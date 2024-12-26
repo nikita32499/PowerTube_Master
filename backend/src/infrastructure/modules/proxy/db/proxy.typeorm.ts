@@ -1,10 +1,11 @@
 // import { EnumProxyType, TProxy } from 'shared-vpn-master';
 // import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-import { EnumProxyType, TProxy } from 'core/entities/proxy/types/proxy.entities'
+import { Proxy } from 'core/entities/proxy/proxy.entity'
+import { EnumProxyType } from 'core/entities/proxy/types/proxy.types'
 import { EntitySchemaTyped } from 'infrastructure/libs/typeorm/typeorm.libs'
 
-export const ProxyDB = new EntitySchemaTyped<TProxy>({
+export const ProxyDB = new EntitySchemaTyped<Proxy>({
     name: 'Proxy', // Название сущности
     tableName: 'proxy',
     columns: {

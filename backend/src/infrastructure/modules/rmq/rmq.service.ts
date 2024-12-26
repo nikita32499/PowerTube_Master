@@ -40,16 +40,16 @@ export class RmqService implements OnModuleDestroy, OnModuleInit {
 		this.channel = await this.connection.createChannel()
 	}
 
-	async sendMessage(queueName: string, data: SerializableObject, routingKey: string) {
+	async sendMessage(queueName: string, data: SerializableObject, routingKey?: string) {
 		await this.channel.assertQueue(queueName, {
 			durable: true,
 		})
 
 		this.channel.sendToQueue(queueName, Buffer.from(JSON.stringify(data)), {
 			persistent: true,
-			headers: {
+			headers: routingKey ? {
 				'routing-key': routingKey,
-			},
+			} : undefined,
 		})
 
 		console.log(`Message sent to queue ${queueName} with routing key ${routingKey}`)

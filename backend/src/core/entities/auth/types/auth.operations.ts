@@ -12,18 +12,18 @@
 //     DtoAuthRegisterWithPassword: Pick<TUser, 'email'> & { password: string };
 // };
 
-import { TUser } from 'core/entities/user/types/user.entities'
+import { User } from 'core/entities/user/user.entity'
 
 export type TAuthLogin = {
     Request: {
-        email: NonNullable<TUser['email']>
+        email: NonNullable<User['email']>
         password: string
     }
 }
 
 export type TAuthRegisterWithPassword = {
     Request: {
-        email: NonNullable<TUser['email']>
+        email: NonNullable<User['email']>
         password: string
     }
 }

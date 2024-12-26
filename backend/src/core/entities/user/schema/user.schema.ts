@@ -1,19 +1,18 @@
+import { Subscription } from 'core/entities/payment/payment.entity'
 import { SchemaPayment } from 'core/entities/payment/schema/payment.schema'
-import {
-    EnumSubscriptionStatus,
-    TSubscription,
-} from 'core/entities/payment/types/payment.entities'
+import { EnumSubscriptionStatus, } from 'core/entities/payment/types/payment.types'
 import { SchemaProxy } from 'core/entities/proxy/schema/proxy.schema'
 import { Exactly, ZodSafe } from 'core/lib/zod/zod'
 import { z } from 'zod'
-import { EnumUserRole, TUser, TUserClient, TUserJwtData } from '../types/user.entities'
+import { EnumUserRole } from '../types/user.types'
+import { User, UserClient, UserJwtData } from '../user.entity'
 
 export const SchemaSubscription = ZodSafe(
     z.object({
         status: z.nativeEnum(EnumSubscriptionStatus),
         payments: SchemaPayment.array(),
     }),
-).infer<Exactly<TSubscription>>()
+).infer<Exactly<Subscription>>()
 
 export const SchemaUser = ZodSafe(
     z.object({
@@ -29,14 +28,14 @@ export const SchemaUser = ZodSafe(
         proxy: z.union([z.null(), SchemaProxy]),
         active: z.boolean(),
     }),
-).infer<Exactly<TUser>>()
+).infer<Exactly<User>>()
 
 export const SchemaUserJwtData = ZodSafe(
     z.object({
         userId: z.string(),
         version: z.number(),
     }),
-).infer<Exactly<TUserJwtData>>()
+).infer<Exactly<UserJwtData>>()
 
 export const SchemaUserClient = ZodSafe(
     SchemaUser.pick({
@@ -46,4 +45,4 @@ export const SchemaUserClient = ZodSafe(
         subscription: true,
         proxy: true,
     }),
-).infer<Exactly<TUserClient>>()
+).infer<Exactly<UserClient>>()
