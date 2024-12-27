@@ -2,11 +2,13 @@ import { ProxyWorkerData, TProxyDiagnosticData } from 'core/entities/proxy/proxy
 import { ProxyCheckRepository } from 'core/entities/proxy/proxy.repository'
 import { EnumProxyStatus } from 'core/entities/proxy/types/proxy.types'
 
+import { Injectable } from '@nestjs/common'
 import axios, { AxiosResponse } from 'axios'
 import { SchemaGetConnectDataProxyResponse } from 'core/entities/proxy/schema/proxy.schema'
 import { HttpsProxyAgent } from 'https-proxy-agent'
 
 
+@Injectable()
 export class ProxyCheckImpl implements ProxyCheckRepository {
 	constructor() {
 

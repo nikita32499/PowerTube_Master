@@ -10,14 +10,28 @@ export interface TWorkerNodeService {
 
 
 
-export interface WorkerNodeRepository {
-    workerNodeList: WorkerNode[]
+// export interface WorkerDatabaseRepository {
 
-    getAllWorkerNodes(): Promise<WorkerNode[]>
+//     getAllWorkerNodes(): Promise<WorkerNode[]>
 
-    getWorkerNodeByIp(ip: string): Promise<WorkerNode>
+//     getWorkerNodeByIp(ip: string): Promise<WorkerNode>
 
-    connectWorkerNode(workerNode: WorkerNode): boolean
+//     connectWorkerNode(workerNode: WorkerNode): boolean
 
-    updateWorkerNode(workerNode: WorkerNode): Promise<WorkerNode>
+//     updateWorkerNode(workerNode: WorkerNode): Promise<WorkerNode>
+// }
+
+
+export interface WorkerNodeDatabaseRepository {
+
+    getAll(): Promise<WorkerNode[]>
+
+    getByIp(ip: string): Promise<WorkerNode>
+
+
+    getByID(ip: string): Promise<WorkerNode>
+
+    create(workerNode: WorkerNode): Promise<WorkerNode>
+
+    update(id: string, workerNode: Partial<WorkerNode>): Promise<boolean>
 }

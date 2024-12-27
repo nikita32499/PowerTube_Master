@@ -44,15 +44,15 @@
 
 // 	}
 
-// 	async checkAvailableProxy(proxy: ProxyWorkerData): Promise<boolean> {
-// 		const proxyAvail = await this.proxyCheckRepo.checkAvailableProxy(proxy)
+// async checkAvailableProxy(proxy: ProxyWorkerData): Promise<boolean> {
+// 	const proxyAvail = await this.proxyCheckRepo.checkAvailableProxy(proxy)
 
-// 		if (proxyAvail) {
-// 			return true
-// 		} else {
-// 			return false
-// 		}
+// 	if (proxyAvail) {
+// 		return true
+// 	} else {
+// 		return false
 // 	}
+// }
 
 
 

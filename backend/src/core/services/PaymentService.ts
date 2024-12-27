@@ -70,7 +70,7 @@ export class PaymentService implements IPaymentService {
 
         if (!user) throw new Error('Пользователь не найден')
 
-        const pendingPayments = user.subscription.payments.filter(
+        const pendingPayments = user.payments.filter(
             (payment) => payment.status === EnumPaymentStatus.PENDING,
         )
 

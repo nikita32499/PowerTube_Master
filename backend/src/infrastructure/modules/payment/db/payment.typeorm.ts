@@ -1,16 +1,14 @@
-import { Payment, Subscription } from 'core/entities/payment/payment.entity'
+import { Payment } from 'core/entities/payment/payment.entity'
 import {
     EnumEnumPaymentType,
     EnumPaymentCurrency,
     EnumPaymentStatus,
     EnumSubscriptionPeriod,
-    EnumSubscriptionStatus,
-
     TPaymentMethod,
-    TSubscriptionTariff,
+    TSubscriptionTariff
 } from 'core/entities/payment/types/payment.types'
-import { EntitySchemaTyped, TypeormLib } from 'infrastructure/libs/typeorm/typeorm.libs'
-import { EntitySchema } from 'typeorm'
+import { TypeormLib } from 'infrastructure/libs/typeorm/typeorm.libs'
+import { EntitySchemaTyped } from './../../../libs/typeorm/typeorm.libs'
 
 const methodSchema = new EntitySchemaTyped<TPaymentMethod>({
     name: 'method',
@@ -96,28 +94,3 @@ export const PaymentDB = new EntitySchemaTyped<Payment, 'method' | 'tariff'>({
     },
 })
 
-export const SubscriptionDB = new EntitySchema<Subscription>({
-    name: 'Subscription',
-    tableName: 'subscription',
-    columns: {
-        status: {
-            type: 'enum',
-            enum: EnumSubscriptionStatus,
-            nullable: false,
-        },
-    },
-
-    // embeddeds: {
-    //     payments: {
-    //         schema: PaymentDB,
-    //         array: true,
-    //     },
-    // },
-
-    // relations: {
-    //     payments: {
-    //         type: 'one-to-many',
-    //         target: 'Payment',
-    //     },
-    // },
-})

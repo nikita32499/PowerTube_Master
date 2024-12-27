@@ -8,19 +8,19 @@ export class ProxyRabbitController {
 
 
 
-		let index = 0
-		setInterval(() => {
+		// let index = 0
+		// setInterval(() => {
 
-			index = (index + 1) % 2
+		// 	index = (index + 1) % 2
 
-			const queueName = ['1_1_1_1', "22_22_22_22"][index] as string
-
-
-			this.sendMessageToProxyQueue(queueName)
+		// 	const queueName = ['1_1_1_1', "22_22_22_22"][index] as string
 
 
+		// 	this.sendMessageToProxyQueue(queueName)
 
-		}, 1000)
+
+
+		// }, 1000)
 
 
 	}

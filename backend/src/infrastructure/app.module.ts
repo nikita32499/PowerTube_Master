@@ -12,6 +12,8 @@ import { ProxyDB } from './modules/proxy/db/proxy.typeorm'
 import { ProxyModule } from './modules/proxy/proxy.module'
 import { RmqModule } from './modules/rmq/rmq.module'
 import { UserModule } from './modules/user/user.module'
+import { WorkerNodeDB } from './modules/worker/db/worker.typeorm'
+import { WorkerModule } from './modules/worker/worker.module'
 
 @Module({
     imports: [
@@ -23,7 +25,7 @@ import { UserModule } from './modules/user/user.module'
             username: Config.POSTGRES_USER,
             password: Config.POSTGRES_PASSWORD,
             database: Config.POSTGRES_DATABASE,
-            entities: [UserDB, PaymentDB, ProxyDB],
+            entities: [UserDB, PaymentDB, ProxyDB, WorkerNodeDB],
             autoLoadEntities: true,
             synchronize: true,
             migrationsRun: true
@@ -32,8 +34,10 @@ import { UserModule } from './modules/user/user.module'
         PaymentModule,
         UserModule,
         AuthModule,
-        ProxyModule
+        ProxyModule,
+        WorkerModule,
         // LoggerModule,
+        // CacheModule,
     ],
     controllers: [],
     providers: [

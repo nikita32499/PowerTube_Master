@@ -1,6 +1,7 @@
-import { Subscription } from 'core/entities/payment/payment.entity'
+import { Payment } from 'core/entities/payment/payment.entity'
 import { Proxy } from 'core/entities/proxy/proxy.entity'
 
+import { EnumSubscriptionStatus } from '../payment/types/payment.types'
 import { EnumUserRole } from './types/user.types'
 
 
@@ -16,7 +17,8 @@ export class User {
     jwtVersion: number
     lastAt: number | null
     createdAt: number
-    subscription: Subscription
+    status: EnumSubscriptionStatus
+    payments: Payment[]
     proxy: Proxy | null
     active: boolean
 
@@ -29,7 +31,8 @@ export class User {
         this.jwtVersion = userData.jwtVersion
         this.lastAt = userData.lastAt
         this.createdAt = userData.createdAt
-        this.subscription = new Subscription(userData.subscription)
+        this.status = userData.status
+        this.payments = userData.payments.map((payment) => new Payment(payment))
         this.proxy = userData.proxy ? new Proxy(userData.proxy) : null
         this.active = userData.active
     }
@@ -49,12 +52,13 @@ export class UserJwtData {
 
 export class UserClient implements Pick<
     User,
-    'id' | 'createdAt' | 'lastAt' | 'subscription' | 'proxy'
+    'id' | 'createdAt' | 'lastAt' | 'status' | 'payments' | 'proxy'
 > {
     id: string
     createdAt: number
     lastAt: number | null
-    subscription: Subscription
+    status: EnumSubscriptionStatus
+    payments: Payment[]
     proxy: Proxy | null
 
 
@@ -62,7 +66,8 @@ export class UserClient implements Pick<
         this.id = userData.id
         this.createdAt = userData.createdAt
         this.lastAt = userData.lastAt
-        this.subscription = userData.subscription
+        this.status = userData.status
+        this.payments = userData.payments
         this.proxy = userData.proxy
     }
 }

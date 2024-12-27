@@ -45,6 +45,8 @@ services:
               APPDIR: "."
         expose:
           - "3001"
+        ports:
+          - "34560:34560"
         restart: always
         env_file: .env.dev
         depends_on:

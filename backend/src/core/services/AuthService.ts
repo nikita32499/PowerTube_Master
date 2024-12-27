@@ -42,10 +42,8 @@ export class AuthService implements IAuthService {
             email: data.email,
             passwordHash: await this.authRepository.cryptPassword(data.password),
             role: EnumUserRole.USER,
-            subscription: {
-                status: EnumSubscriptionStatus.TRIALING,
-                payments: [],
-            },
+            status: EnumSubscriptionStatus.TRIALING,
+            payments: [],
             createdAt: Date.now(),
             lastAt: null,
             jwtVersion: 0,
@@ -58,16 +56,14 @@ export class AuthService implements IAuthService {
         return newUser
     };
 
-    register: IAuthService['register'] = () => {
+    register: IAuthService['register'] = async () => {
         const createData: TUserCreate['Entity'] = {
             authId: UserLib.generateAuthId(),
             email: null,
             passwordHash: null,
             role: EnumUserRole.USER,
-            subscription: {
-                status: EnumSubscriptionStatus.TRIALING,
-                payments: [],
-            },
+            status: EnumSubscriptionStatus.TRIALING,
+            payments: [],
             createdAt: Date.now(),
             lastAt: null,
             jwtVersion: 0,
@@ -75,7 +71,7 @@ export class AuthService implements IAuthService {
             proxy: null,
         }
 
-        const newUser = this.userService.create(createData)
+        const newUser = await this.userService.create(createData)
 
         return newUser
     };

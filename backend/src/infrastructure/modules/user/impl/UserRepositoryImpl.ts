@@ -31,7 +31,9 @@ export class UserRepositoryImpl implements UserDatabaseRepository {
         return TypeormLib.isAffectedSuccess(result)
     }
     async create(data: TUserCreate['Entity']): Promise<User> {
-        const newUser = await this.userDB.save(data)
+        const newUserData = await this.userDB.create(data)
+
+        const newUser = await this.userDB.save(newUserData)
 
         return UserMapper.toEntity(newUser)
     }
@@ -42,7 +44,7 @@ export class UserRepositoryImpl implements UserDatabaseRepository {
     }
 
     async getAll() {
-        const users = await this.userDB.find({ withDeleted: true })
+        const users = await this.userDB.find({ withDeleted: true, relations: { proxy: true } })
         return users.map((user) => UserMapper.toEntity(user))
     }
     getOne: UserDatabaseRepository['getOne'] = async (field) => {

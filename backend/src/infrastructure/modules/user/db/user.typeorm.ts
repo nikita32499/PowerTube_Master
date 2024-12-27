@@ -1,10 +1,11 @@
+import { EnumSubscriptionStatus } from 'core/entities/payment/types/payment.types'
 import { EnumUserRole } from 'core/entities/user/types/user.types'
 import { User } from 'core/entities/user/user.entity'
-import { EntitySchemaTyped, TypeormLib } from 'infrastructure/libs/typeorm/typeorm.libs'
-import { SubscriptionDB } from 'infrastructure/modules/payment/db/payment.typeorm'
-import { ProxyDB } from 'infrastructure/modules/proxy/db/proxy.typeorm'
+import { TypeormLib } from 'infrastructure/libs/typeorm/typeorm.libs'
+import { EntitySchema } from 'typeorm'
 
-export const UserDB = new EntitySchemaTyped<User, 'subscription' | 'proxy'>({
+
+export const UserDB = new EntitySchema<User>({
     name: 'User', // Имя сущности
     tableName: 'users', // Опционально, если имя таблицы отличается
     columns: {
@@ -53,13 +54,31 @@ export const UserDB = new EntitySchemaTyped<User, 'subscription' | 'proxy'>({
             type: 'boolean',
             nullable: false,
         },
-    },
-    embeddeds: {
-        subscription: {
-            schema: SubscriptionDB,
+
+        status: {
+            type: 'enum',
+            enum: EnumSubscriptionStatus,
+            nullable: false,
         },
+    },
+
+
+
+    relations: {
         proxy: {
-            schema: ProxyDB,
+            target: 'Proxy',
+            type: 'one-to-one',
+            joinColumn: false
+            // joinColumn: {
+            //     name: 'userId',
+            //     referencedColumnName: 'id'
+            // }
+        },
+
+        payments: {
+            target: 'Payment',
+            type: 'one-to-many',
+            inverseSide: 'user'
         },
     },
 })

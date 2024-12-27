@@ -20,7 +20,7 @@ export class AuthRepositoryImpl implements AuthRepository {
     async createUserToken(data: UserJwtData): Promise<string> {
         return jwt.sign(data, Config.JWT_SECRET_KEY, {
             expiresIn: '24h',
-            algorithm: 'RS256',
+            algorithm: 'HS512',
         })
     }
 

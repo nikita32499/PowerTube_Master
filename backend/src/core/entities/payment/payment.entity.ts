@@ -1,4 +1,4 @@
-import { EnumPaymentStatus, EnumSubscriptionPeriod, EnumSubscriptionStatus, TSubscriptionTariff } from './types/payment.types'
+import { EnumPaymentStatus, EnumSubscriptionPeriod, TSubscriptionTariff } from './types/payment.types'
 
 import { TPaymentMethod } from './types/payment.types'
 
@@ -38,14 +38,6 @@ export class Payment {
     }
 }
 
-export class Subscription {
-    status: EnumSubscriptionStatus
-    payments: Payment[]
-    constructor(dataSub: Subscription) {
-        this.status = dataSub.status
-        this.payments = dataSub.payments.map((payment) => new Payment(payment))
-    }
-}
 
 
 export class PaymentClient implements Pick<

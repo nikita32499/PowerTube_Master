@@ -30,15 +30,16 @@ export class ProxyWorkerData {
 
 export class Proxy extends ProxyWorkerData {
     id: string
+    userId: string
 
     constructor(proxyData: Proxy) {
         super(proxyData)
         this.id = proxyData.id
-
+        this.userId = proxyData.userId
     }
 }
 
-export type ProxyDiagnosticData = {
+export type TProxyDiagnosticData = {
     delay: number
 
 

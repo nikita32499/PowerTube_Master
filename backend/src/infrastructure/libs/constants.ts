@@ -1,5 +1,12 @@
 export const DI_TOKENS = {
-    PROXY_REPOSITORY: Symbol('PROXY_REPOSITORY'),
+    WORKER: {
+        DATABASE: Symbol('WORKER_NODE_DATABASE'),
+    },
+    PROXY: {
+        DATABASE: Symbol('PROXY_DATABASE'),
+        SOCKET_WORKER: Symbol('PROXY_SOCKET_WORKER'),
+        CHECK: Symbol('PROXY_CHECK_REPOSITORY'),
+    },
     UserDatabaseRepository: Symbol('UserDatabaseRepository'),
     PaymentApiImpl: Symbol('PaymentApiImpl'),
     PaymentDatabaseRepository: Symbol('PaymentDatabaseRepository'),
@@ -8,7 +15,5 @@ export const DI_TOKENS = {
 
 
 export enum ENUM_RABBIT_MQ_QUEUES {
-    PAYMENT = 'PAYMENT',
-    PROXY = 'PROXY',
-    WORKER = 'WORKER',
+    MASTER = 'MASTER',
 }

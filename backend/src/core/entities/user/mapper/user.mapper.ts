@@ -6,7 +6,8 @@ export class UserMapper {
             id: user.id,
             createdAt: user.createdAt,
             lastAt: user.lastAt,
-            subscription: user.subscription,
+            status: user.status,
+            payments: user.payments,
             proxy: user.proxy,
         }
     }

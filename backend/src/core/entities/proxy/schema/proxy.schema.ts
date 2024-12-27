@@ -4,7 +4,7 @@
 
 import { Exactly, ZodSafe } from 'core/lib/zod/zod'
 import { z } from 'zod'
-import { Proxy } from '../proxy.entity'
+import { Proxy, ProxyWorkerData } from '../proxy.entity'
 import { EnumProxyType } from '../types/proxy.types'
 export const SchemaProxy = ZodSafe(
     z.object({
@@ -16,10 +16,19 @@ export const SchemaProxy = ZodSafe(
         host: z.string(),
         port: z.number(),
         avail: z.boolean(),
+        userId: z.string()
     }),
 ).infer<Exactly<Proxy>>()
 
-
+export const SchemaProxyWorkerData = ZodSafe(z.object({
+    type: z.nativeEnum(EnumProxyType),
+    login: z.string(),
+    password: z.string(),
+    host: z.string(),
+    port: z.number(),
+    avail: z.boolean(),
+    ip: z.string()
+})).infer<Exactly<ProxyWorkerData>>()
 
 export const SchemaGetConnectDataProxyResponse = z.object({
     ip: z.string()

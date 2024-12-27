@@ -17,7 +17,7 @@ export class UserController {
     })
     @SetPermissions(EnumUserRole.ADMIN)
     @Get('getAll')
-    async getUser() {
+    async getUser(): Promise<DtoUser[]> {
         return this.userService.getAll()
     }
 
@@ -27,7 +27,7 @@ export class UserController {
     })
     @SetPermissions(EnumUserRole.USER)
     @Get('getById')
-    async getUserById(@GetUserId() userId: string) {
+    async getUserById(@GetUserId() userId: string): Promise<DtoUserClient> {
         const user = await this.userService.getById(userId)
         if (!user) throw new NotFoundException('User not found')
         return UserMapper.toClientFormat(user)

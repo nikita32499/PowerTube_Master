@@ -22,11 +22,11 @@ export interface ProxyCheckRepository {
 
 }
 
-export interface ProxyWorkerRepository {
+export interface ProxySocketWorkerRepository {
 
-    createProxy(ip: string): Promise<ProxyWorkerData>
+    createProxy(host: string): Promise<ProxyWorkerData>
 
-    getAllProxy(ip: string): Promise<ProxyWorkerData[]>
+    getAllProxy(host: string): Promise<ProxyWorkerData[]>
 
-    deleteProxy(ip: string, login: string): Promise<boolean>
+    deleteProxy(host: string, login: string): Promise<boolean>
 }

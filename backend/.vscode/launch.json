@@ -5,21 +5,46 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "34560",
+            "address": "localhost",
+            "localRoot": "${workspaceFolder}",
+            "name": "!!!Attach to Docker",
+            "port": 34560,
+            "remoteRoot": "/app",
+            "request": "attach",
+            "skipFiles": [
+                "/app/**/node_modules/**",
+                "**/node_modules/**",
+                "<node_internals>/**"
+            ],
+            "type": "node",
+            "restart": true,
+            "showAsyncStacks": true,
+            "smartStep": true,
+            "sourceMaps": true
+        },
+
+        {
+            "address": "localhost",
+            "localRoot": "${workspaceFolder}",
+            "name": "FULL Attach to Docker",
+            "port": 34560,
+            "remoteRoot": "/app",
+            "request": "attach",
+            "skipFiles": ["/app/**/node_modules/**", "**/node_modules/**"],
+            "type": "node",
+            "restart": true,
+            "showAsyncStacks": true,
+            "smartStep": true,
+            "sourceMaps": true
+        },
+
+        {
+            "name": "!!!34560",
             "port": 34560,
             "request": "attach",
             "skipFiles": ["<node_internals>/**", "node_modules/**"],
             "type": "node",
             "restart": true
-        },
-
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Launch Program",
-            "skipFiles": ["<node_internals>/**"],
-            "program": "${workspaceFolder}/src/users/users.controller.ts",
-            "outFiles": ["${workspaceFolder}/**/*.js"]
         }
     ]
 }

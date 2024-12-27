@@ -19,12 +19,12 @@ export class AuthController {
     })
     @SetPermissions('public')
     @Post('login')
-    async login(@Body() data: DtoAuthLogin, @Res() response: Response) {
+    async login(@Body() data: DtoAuthLogin, @Res({ passthrough: true }) response: Response): Promise<DtoUserClient> {
         const user = await this.authService.login(data)
 
         await this.setAccessToken(user, response)
 
-        return { user: UserMapper.toClientFormat(user) }
+        return UserMapper.toClientFormat(user)
     }
 
     @ApiOkResponse({
@@ -35,24 +35,26 @@ export class AuthController {
     @Post('register-with-Password')
     async registerWithPassword(
         @Body() data: DtoAuthRegisterWithPassword,
-        @Res() response: Response,
-    ) {
+        @Res({ passthrough: true }) response: Response,
+    ): Promise<DtoUserClient> {
         const user = await this.authService.registerWithPassword(data)
 
         await this.setAccessToken(user, response)
 
-        return { user: UserMapper.toClientFormat(user) }
+        return UserMapper.toClientFormat(user)
     }
 
     @ApiOkResponse({ description: 'Register a new user', type: DtoUserClient })
     @SetPermissions('public')
     @Post('register')
-    async register(@Res() response: Response) {
+    async register(@Res({ passthrough: true }) response: Response): Promise<DtoUserClient> {
         const user = await this.authService.register()
 
         await this.setAccessToken(user, response)
 
-        return { user: UserMapper.toClientFormat(user) }
+        return UserMapper.toClientFormat(user)
+
+
     }
 
     private async setAccessToken(user: User, response: Response) {
