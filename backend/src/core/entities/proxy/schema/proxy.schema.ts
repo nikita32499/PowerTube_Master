@@ -16,7 +16,7 @@ export const SchemaProxy = ZodSafe(
         host: z.string(),
         port: z.number(),
         avail: z.boolean(),
-        userId: z.string()
+        userId: z.union([z.string(), z.null()])
     }),
 ).infer<Exactly<Proxy>>()
 

@@ -47,31 +47,10 @@ export type TPaymentMethod = {
 }
 
 
-export type TSubscriptionTariff =
-    | {
-        period: EnumSubscriptionPeriod.Month1
-        price: {
-            [EnumPaymentCurrency.RUB]: EnumSubscriptionTariffPrice.Month1
-        }
-    }
-    | {
-        period: EnumSubscriptionPeriod.Month3
-        price: {
-            [EnumPaymentCurrency.RUB]: EnumSubscriptionTariffPrice.Month3
-        }
-    }
-    | {
-        period: EnumSubscriptionPeriod.Month6
-        price: {
-            [EnumPaymentCurrency.RUB]: EnumSubscriptionTariffPrice.Month6
-        }
-    }
-    | {
-        period: EnumSubscriptionPeriod.Year1
-        price: {
-            [EnumPaymentCurrency.RUB]: EnumSubscriptionTariffPrice.Year1
-        }
-    }
+export type TSubscriptionTariff = {
+    period: EnumSubscriptionPeriod
+    price: number
+}
 export type TTrialPeriod = {
     duration: 'Day1'
 }

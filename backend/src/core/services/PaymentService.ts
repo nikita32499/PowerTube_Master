@@ -44,9 +44,7 @@ export class PaymentService implements IPaymentService {
             transactionId: 'undefined',
             tariff: {
                 period: data.period,
-                price: {
-                    RUB: EnumSubscriptionTariffPrice[data.period] as any,
-                },
+                price: EnumSubscriptionTariffPrice[data.period]
             },
         }
 

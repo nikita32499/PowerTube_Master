@@ -14,7 +14,7 @@ export class Payment {
     method: TPaymentMethod
     period: EnumSubscriptionPeriod
     tariff: TSubscriptionTariff
-    details: string | null
+    details: object | null
     constructor({
         id,
         transactionId,
@@ -49,7 +49,7 @@ export class PaymentClient implements Pick<
     createdAt: number
     period: EnumSubscriptionPeriod
     method: TPaymentMethod
-    details: string | null
+    details: object | null
 
 
     constructor(data: PaymentClient) {

@@ -7,8 +7,6 @@ import {
     EnumPaymentCurrency,
     EnumPaymentStatus,
     EnumSubscriptionPeriod,
-    EnumSubscriptionTariffPrice,
-
     TSubscriptionTariff
 } from '../types/payment.types'
 
@@ -16,32 +14,10 @@ import {
 import { Payment, PaymentClient } from '../payment.entity'
 
 export const SchemaSubscriptionTariff = ZodSafe(
-    z.discriminatedUnion('period', [
-        z.object({
-            period: z.literal(EnumSubscriptionPeriod.Month1),
-            price: z.object({
-                [EnumPaymentCurrency.RUB]: z.literal(EnumSubscriptionTariffPrice.Month1),
-            }),
-        }),
-        z.object({
-            period: z.literal(EnumSubscriptionPeriod.Month3),
-            price: z.object({
-                [EnumPaymentCurrency.RUB]: z.literal(EnumSubscriptionTariffPrice.Month3),
-            }),
-        }),
-        z.object({
-            period: z.literal(EnumSubscriptionPeriod.Month6),
-            price: z.object({
-                [EnumPaymentCurrency.RUB]: z.literal(EnumSubscriptionTariffPrice.Month6),
-            }),
-        }),
-        z.object({
-            period: z.literal(EnumSubscriptionPeriod.Year1),
-            price: z.object({
-                [EnumPaymentCurrency.RUB]: z.literal(EnumSubscriptionTariffPrice.Year1),
-            }),
-        }),
-    ]),
+    z.object({
+        period: z.nativeEnum(EnumSubscriptionPeriod),
+        price: z.number(),
+    }),
 ).infer<Exactly<TSubscriptionTariff>>()
 
 export const SchemaPayment = ZodSafe(
@@ -57,7 +33,7 @@ export const SchemaPayment = ZodSafe(
             type: z.nativeEnum(EnumEnumPaymentType),
         }),
         period: z.nativeEnum(EnumSubscriptionPeriod),
-        details: z.union([z.string(), z.null()]),
+        details: z.union([z.object({}), z.null()]),
     }),
 ).infer<Exactly<Payment>>()
 

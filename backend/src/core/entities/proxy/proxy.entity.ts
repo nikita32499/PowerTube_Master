@@ -30,7 +30,7 @@ export class ProxyWorkerData {
 
 export class Proxy extends ProxyWorkerData {
     id: string
-    userId: string
+    userId: string | null
 
     constructor(proxyData: Proxy) {
         super(proxyData)

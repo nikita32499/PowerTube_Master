@@ -1,96 +1,45 @@
 import { Payment } from 'core/entities/payment/payment.entity'
 import {
-    EnumEnumPaymentType,
-    EnumPaymentCurrency,
     EnumPaymentStatus,
     EnumSubscriptionPeriod,
     TPaymentMethod,
     TSubscriptionTariff
 } from 'core/entities/payment/types/payment.types'
-import { TypeormLib } from 'infrastructure/libs/typeorm/typeorm.libs'
-import { EntitySchemaTyped } from './../../../libs/typeorm/typeorm.libs'
+import { UserDB } from 'infrastructure/modules/user/db/user.typeorm'
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
 
-const methodSchema = new EntitySchemaTyped<TPaymentMethod>({
-    name: 'method',
+@Entity('payment')
+export class PaymentDB implements Payment {
+    @PrimaryGeneratedColumn('uuid')
+    id!: string
 
-    columns: {
-        currency: {
-            type: 'enum',
-            enum: EnumPaymentCurrency,
-            nullable: false,
-        },
-        type: {
-            type: 'enum',
-            enum: EnumEnumPaymentType,
-            nullable: false,
-        },
-    },
-})
+    @Column("varchar")
+    transactionId!: string
 
-const tariffSchema = new EntitySchemaTyped<TSubscriptionTariff>({
-    name: 'tariff',
-    columns: {
-        period: {
-            type: 'enum',
-            enum: EnumSubscriptionPeriod,
-            nullable: false,
-        },
-        price: {
-            type: 'jsonb',
+    @Column("varchar")
+    userId!: string
 
-            nullable: false,
-        },
-    },
-})
+    @Column({ type: 'enum', enum: EnumPaymentStatus })
+    status!: EnumPaymentStatus
 
-export const PaymentDB = new EntitySchemaTyped<Payment, 'method' | 'tariff'>({
-    name: 'Payment',
-    tableName: 'payment',
-    columns: {
-        id: {
-            type: 'varchar',
-            primary: true,
-            generated: 'uuid',
-            nullable: false,
-        },
+    @Column({ type: 'bigint' })
+    createdAt!: number
 
-        transactionId: {
-            type: 'varchar',
-            nullable: false,
-        },
-        status: {
-            type: 'enum',
-            enum: EnumPaymentStatus,
-            nullable: false,
-        },
-        createdAt: {
-            type: 'bigint',
-            nullable: false,
-            transformer: new TypeormLib.BigIntConverter(),
-        },
-        period: {
-            type: 'enum',
-            enum: EnumSubscriptionPeriod,
-            nullable: false,
-        },
+    @Column({ type: 'jsonb' })
+    method!: TPaymentMethod
 
-        details: {
-            type: 'text',
-            nullable: true,
-        },
-        userId: {
-            type: 'varchar',
-            nullable: false,
-        },
-    },
+    @Column({ type: 'enum', enum: EnumSubscriptionPeriod })
+    period!: EnumSubscriptionPeriod
 
-    embeddeds: {
-        method: {
-            schema: methodSchema,
-        },
-        tariff: {
-            schema: tariffSchema,
-        },
-    },
-})
+    @Column({ type: 'jsonb' })
+    tariff!: TSubscriptionTariff
 
+    @Column({ type: "jsonb", nullable: true })
+    details!: object | null
+
+
+
+    @ManyToOne(() => UserDB, user => user.payments)
+    @JoinColumn({ name: 'userId' })
+    user!: UserDB
+}   

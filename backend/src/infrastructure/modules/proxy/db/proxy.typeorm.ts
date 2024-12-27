@@ -3,7 +3,8 @@
 
 import { Proxy } from 'core/entities/proxy/proxy.entity'
 import { EnumProxyType } from 'core/entities/proxy/types/proxy.types'
-import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm'
+import { UserDB } from 'infrastructure/modules/user/db/user.typeorm'
+import { Column, Entity, Index, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
 
 // export const ProxyDB = new EntitySchema<Proxy>({
 //     name: 'Proxy', // Название сущности
@@ -66,32 +67,35 @@ import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm'
 @Entity('Proxy')
 @Index('IDX_PROXY_UNIQUE_COMBINATION', ['host', 'port', 'login', 'password'], { unique: true })
 export class ProxyDB implements Proxy {
-    @PrimaryGeneratedColumn('uuid')
+    @PrimaryGeneratedColumn("uuid")
     id!: string
 
     @Column({ type: 'enum', enum: EnumProxyType })
     type!: EnumProxyType
 
-    @Column()
+    @Column("varchar")
     login!: string
 
-    @Column()
+    @Column("varchar")
     password!: string
 
-    @Column()
+    @Column("varchar")
     ip!: string
 
-    @Column()
+    @Column("varchar")
     host!: string
 
-    @Column()
+    @Column("int")
     port!: number
 
     @Column({ default: true })
     avail!: boolean
 
-    @Column({ nullable: true })
-    userId!: string
+    @Column({ type: 'varchar', nullable: true })
+    userId!: string | null
 
 
+    @OneToOne(() => UserDB)
+    @JoinColumn({ name: 'userId' })
+    user?: UserDB
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { Proxy, ProxyWorkerData } from 'core/entities/proxy/proxy.entity'
+import { ProxyWorkerData } from 'core/entities/proxy/proxy.entity'
 import { ProxyDatabaseRepository } from 'core/entities/proxy/proxy.repository'
 import { TypeormLib } from 'infrastructure/libs/typeorm/typeorm.libs'
 import { Repository } from 'typeorm'
@@ -10,7 +10,7 @@ import { ProxyDB } from '../db/proxy.typeorm'
 
 @Injectable()
 export class ProxyDatabaseImpl implements ProxyDatabaseRepository {
-	constructor(@InjectRepository(ProxyDB) private readonly proxyDB: Repository<Proxy>) {
+	constructor(@InjectRepository(ProxyDB) private readonly proxyDB: Repository<ProxyDB>) {
 
 	}
 	async saveProxy(proxy: ProxyWorkerData) {
