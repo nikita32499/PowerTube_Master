@@ -1,4 +1,4 @@
-import { TResponse } from 'core/lib/response.types'
+import { TResponse } from 'core/helpers/response.types'
 import { User, UserClient } from '../user.entity'
 
 export type TUserCreate = {

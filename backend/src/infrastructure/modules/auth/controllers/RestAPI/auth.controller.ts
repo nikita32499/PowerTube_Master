@@ -1,24 +1,27 @@
-import { Body, Controller, Post, Res } from '@nestjs/common'
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger'
+import { Body, Controller, Res } from '@nestjs/common'
+import { ApiTags } from '@nestjs/swagger'
+import { DtoUserClient } from 'core/entities/user/dto/user.dto'
 import { UserMapper } from 'core/entities/user/mapper/user.mapper'
 import { User } from 'core/entities/user/user.entity'
 import { Response } from 'express'
-import { SetPermissions } from 'infrastructure/libs/decorators/controller'
+import { BaseController } from 'infrastructure/common/controller/BaseController'
+import { PostEndpoint } from 'infrastructure/common/controller/MethodsHTTP'
 import { NestAuthAdapter } from 'infrastructure/modules/auth/NestAuthAdapter'
-import { DtoUserClient } from 'infrastructure/modules/user/dto/user.dto'
-import { DtoAuthLogin, DtoAuthRegisterWithPassword } from '../../dto/auth.dto'
+import { DtoAuthLogin, DtoAuthRegisterWithPassword } from '../../../../../core/entities/auth/dto/auth.dto'
 
 @ApiTags('Auth')
 @Controller('auth')
-export class AuthController {
-    constructor(private readonly authService: NestAuthAdapter) { }
+export class AuthController extends BaseController {
+    constructor(private readonly authService: NestAuthAdapter) {
+        super()
+    }
 
-    @ApiOkResponse({
+    @PostEndpoint({
         description: 'Login a user',
         type: DtoUserClient,
+        path: 'login',
+        permission: 'public'
     })
-    @SetPermissions('public')
-    @Post('login')
     async login(@Body() data: DtoAuthLogin, @Res({ passthrough: true }) response: Response): Promise<DtoUserClient> {
         const user = await this.authService.login(data)
 
@@ -27,12 +30,13 @@ export class AuthController {
         return UserMapper.toClientFormat(user)
     }
 
-    @ApiOkResponse({
+
+    @PostEndpoint({
         description: 'Register a new user with password',
         type: DtoUserClient,
+        path: 'register-with-Password',
+        permission: 'public'
     })
-    @SetPermissions('public')
-    @Post('register-with-Password')
     async registerWithPassword(
         @Body() data: DtoAuthRegisterWithPassword,
         @Res({ passthrough: true }) response: Response,
@@ -44,9 +48,13 @@ export class AuthController {
         return UserMapper.toClientFormat(user)
     }
 
-    @ApiOkResponse({ description: 'Register a new user', type: DtoUserClient })
-    @SetPermissions('public')
-    @Post('register')
+
+    @PostEndpoint({
+        description: 'Register a new user',
+        type: DtoUserClient,
+        path: 'register',
+        permission: 'public'
+    })
     async register(@Res({ passthrough: true }) response: Response): Promise<DtoUserClient> {
         const user = await this.authService.register()
 
@@ -66,13 +74,5 @@ export class AuthController {
         await this.setCookie('access_token', token, response)
     }
 
-    private async setCookie(name: string, value: string, response: Response) {
-        response.cookie(name, value, {
-            httpOnly: true,
-            secure: true,
-            sameSite: 'strict',
-            maxAge: 24 * 60 * 60 * 1000,
-            signed: true,
-        })
-    }
+
 }

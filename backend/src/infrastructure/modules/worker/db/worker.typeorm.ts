@@ -1,55 +1,44 @@
+import { TWorkerNodeHistory } from 'core/entities/worker/types/worker.types'
 import { WorkerNode } from 'core/entities/worker/worker.entity'
-import { EntitySchemaTyped } from 'infrastructure/libs/typeorm/typeorm.libs'
+import { TypeormLib } from 'infrastructure/common/helpers/typeorm/typeorm.libs'
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
+import { z } from 'zod'
 
+@Entity('worker_node')
+export class WorkerNodeDB implements Omit<WorkerNode, "getWorkerNodeRating"> {
+	@PrimaryGeneratedColumn('uuid')
+	id!: string
 
+	@Column("varchar")
+	ip!: string
 
-export const WorkerNodeDB = new EntitySchemaTyped<WorkerNode>({
-	name: 'WorkerNode',
-	tableName: 'worker_node',
-	columns: {
-		id: {
-			type: 'varchar',
-			primary: true,
-			generated: 'uuid',
-			nullable: false,
-		},
-		ip: {
-			type: 'varchar',
-			nullable: false,
-		},
-		host: {
-			type: 'varchar',
-			nullable: false,
-		},
-		speed: {
-			type: 'int',
-			nullable: false,
-		},
-		maxConnections: {
-			type: 'int',
-			nullable: false,
-		},
-		currentConnectionsCount: {
-			type: 'int',
-			nullable: false,
-		},
-		rating: {
-			type: 'int',
-			nullable: false,
-		},
-		available: {
-			type: 'boolean',
-			nullable: false,
-		},
-		history: {
-			type: 'jsonb',
-			nullable: false,
-		},
+	@Column("varchar")
+	host!: string
+
+	@Column("int")
+	speed!: number
+
+	@Column("int")
+	maxConnections!: number
+
+	@Column("int")
+	currentConnectionsCount!: number
+
+	@Column("int")
+	rating!: number
+
+	@Column("boolean")
+	available!: boolean
+
+	@Column('jsonb', {
+		array: true, transformer: new TypeormLib.JsonbValidator(z.array(z.object({
+			rating: z.number(),
+			timestamp: z.string(),
+		})))
+	})
+	history!: TWorkerNodeHistory[]
 
 
 
 
-
-
-	},
-})
+}

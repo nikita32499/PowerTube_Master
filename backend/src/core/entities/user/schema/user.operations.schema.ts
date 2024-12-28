@@ -1,5 +1,5 @@
 import { TUserCreate } from 'core/entities/user/types/user.operations'
-import { Exactly, ZodSafe } from 'core/lib/zod/zod'
+import { Exactly, ZodSafe } from 'core/helpers/zod/zod'
 import { z } from 'zod'
 
 export const SchemaUserCreateRequest = ZodSafe(

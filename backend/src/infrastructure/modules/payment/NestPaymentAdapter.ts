@@ -4,7 +4,7 @@ import {
     PaymentDatabaseRepository,
 } from 'core/entities/payment/payment.repository'
 import { PaymentService } from 'core/services/PaymentService'
-import { DI_TOKENS } from 'infrastructure/libs/constants'
+import { DI_TOKENS } from 'infrastructure/config/constants'
 import { NestUserAdapter } from '../user/NestUserAdapter'
 
 @Injectable()

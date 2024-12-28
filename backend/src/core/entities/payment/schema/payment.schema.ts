@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
 
-import { Exactly, ZodSafe } from 'core/lib/zod/zod'
+import { Exactly, ZodSafe } from 'core/helpers/zod/zod'
 import {
     EnumEnumPaymentType,
     EnumPaymentCurrency,
@@ -27,7 +27,7 @@ export const SchemaPayment = ZodSafe(
         userId: z.string(),
         status: z.nativeEnum(EnumPaymentStatus),
         tariff: SchemaSubscriptionTariff,
-        createdAt: z.number(),
+        createdAt: z.date(),
         method: z.object({
             currency: z.nativeEnum(EnumPaymentCurrency),
             type: z.nativeEnum(EnumEnumPaymentType),

@@ -1,6 +1,6 @@
 import { forwardRef, Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { DI_TOKENS } from 'infrastructure/libs/constants'
+import { DI_TOKENS } from 'infrastructure/config/constants'
 import { UserModule } from '../user/user.module'
 import { PaymentController } from './controllers/RestAPI/payment.controller'
 import { PaymentDB } from './db/payment.typeorm'

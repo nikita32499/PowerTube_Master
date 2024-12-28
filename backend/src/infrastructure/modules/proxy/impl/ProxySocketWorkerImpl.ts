@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { ProxyWorkerData } from 'core/entities/proxy/proxy.entity'
 import { ProxySocketWorkerRepository } from 'core/entities/proxy/proxy.repository'
 import { SchemaProxyWorkerData } from 'core/entities/proxy/schema/proxy.schema'
-import { RmqService } from 'infrastructure/modules/rmq/rmq.service'
+import { RmqService } from 'infrastructure/common/modules/rmq/rmq.service'
 import { z } from 'zod'
 
 @Injectable()

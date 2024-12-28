@@ -1,4 +1,4 @@
-import { Exactly, ZodSafe } from 'core/lib/zod/zod'
+import { Exactly, ZodSafe } from 'core/helpers/zod/zod'
 import { z } from 'zod'
 import { TAuthLogin, TAuthRegisterWithPassword } from '../types/auth.operations'
 

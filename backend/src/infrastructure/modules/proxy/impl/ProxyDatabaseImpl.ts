@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { ProxyWorkerData } from 'core/entities/proxy/proxy.entity'
 import { ProxyDatabaseRepository } from 'core/entities/proxy/proxy.repository'
-import { TypeormLib } from 'infrastructure/libs/typeorm/typeorm.libs'
+import { TypeormLib } from 'infrastructure/common/helpers/typeorm/typeorm.libs'
 import { Repository } from 'typeorm'
 import { ProxyDB } from '../db/proxy.typeorm'
 

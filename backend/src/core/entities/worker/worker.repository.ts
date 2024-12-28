@@ -35,3 +35,8 @@ export interface WorkerNodeDatabaseRepository {
 
     update(id: string, workerNode: Partial<WorkerNode>): Promise<boolean>
 }
+
+
+export interface WorkerNodeSocketRepository {
+    (ip: string): Promise<WorkerNode>
+}

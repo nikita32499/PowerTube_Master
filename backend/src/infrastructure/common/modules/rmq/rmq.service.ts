@@ -1,7 +1,7 @@
 import { Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common'
 import { RmqContext, RmqOptions, Transport } from '@nestjs/microservices'
 import * as amqp from 'amqplib'
-import { Config } from 'infrastructure/libs/config'
+import { Config } from 'infrastructure/config/config'
 import { z, ZodSchema } from 'zod'
 
 @Injectable()

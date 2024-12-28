@@ -10,7 +10,7 @@ export class Payment {
     transactionId: string
     userId: string
     status: EnumPaymentStatus
-    createdAt: number
+    createdAt: Date
     method: TPaymentMethod
     period: EnumSubscriptionPeriod
     tariff: TSubscriptionTariff
@@ -46,7 +46,7 @@ export class PaymentClient implements Pick<
 > {
     id: string
     status: EnumPaymentStatus
-    createdAt: number
+    createdAt: Date
     period: EnumSubscriptionPeriod
     method: TPaymentMethod
     details: object | null

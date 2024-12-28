@@ -2,7 +2,7 @@
 // import { z } from 'zod';
 // import { EnumProxyType, TProxy } from '../types/proxy.entities';
 
-import { Exactly, ZodSafe } from 'core/lib/zod/zod'
+import { Exactly, ZodSafe } from 'core/helpers/zod/zod'
 import { z } from 'zod'
 import { Proxy, ProxyWorkerData } from '../proxy.entity'
 import { EnumProxyType } from '../types/proxy.types'

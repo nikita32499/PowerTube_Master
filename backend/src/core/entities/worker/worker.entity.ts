@@ -1,3 +1,4 @@
+import { WorkerNodeLib } from './helper/workerLib'
 import { TWorkerNodeHistory } from './types/worker.types'
 
 
@@ -40,15 +41,8 @@ export class WorkerNode extends WorkerNodeData {
         super(workerData)
         this.id = workerData.id
         this.ip = workerData.ip
-        this.rating = this.getWorkerNodeRating()
+        this.rating = WorkerNodeLib.getWorkerNodeRating(workerData)
     }
 
-    private getWorkerNodeRating(): number {
 
-
-        let rating = this.maxConnections - this.currentConnectionsCount
-
-
-        return rating
-    }
 }

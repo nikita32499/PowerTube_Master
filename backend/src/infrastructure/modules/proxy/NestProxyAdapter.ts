@@ -3,7 +3,7 @@ import { Proxy, ProxyWorkerData } from 'core/entities/proxy/proxy.entity'
 import { ProxyCheckRepository, ProxyDatabaseRepository, ProxySocketWorkerRepository } from 'core/entities/proxy/proxy.repository'
 import { EnumProxyStatus } from 'core/entities/proxy/types/proxy.types'
 import { User } from 'core/entities/user/user.entity'
-import { DI_TOKENS } from 'infrastructure/libs/constants'
+import { DI_TOKENS } from 'infrastructure/config/constants'
 import { NestUserAdapter } from '../user/NestUserAdapter'
 import { NestWorkerAdapter } from '../worker/NestWorkerAdapter'
 

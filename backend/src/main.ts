@@ -2,14 +2,15 @@ import { INestApplication } from '@nestjs/common'
 import { NestFactory } from '@nestjs/core'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import cookieParser from 'cookie-parser'
-import { Config } from 'infrastructure/libs/config'
-import { RmqService } from 'infrastructure/modules/rmq/rmq.service'
+import { RmqService } from 'infrastructure/common/modules/rmq/rmq.service'
 import { patchNestJsSwagger, ZodValidationPipe } from 'nestjs-zod'
 import { AppModule } from './infrastructure/app.module'
 
 
 
 async function bootstrap() {
+
+
     const app = await NestFactory.create(AppModule)
 
     const rmqService = app.get<RmqService>(RmqService)
@@ -20,7 +21,7 @@ async function bootstrap() {
 
     app.setGlobalPrefix('/api/v1')
 
-    app.use(cookieParser(Config.JWT_SECRET_KEY))
+    app.use(cookieParser())
 
     app.useGlobalPipes(new ZodValidationPipe())
 

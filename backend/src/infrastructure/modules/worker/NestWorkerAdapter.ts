@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common'
 import { WorkerNode } from 'core/entities/worker/worker.entity'
 import { WorkerNodeDatabaseRepository } from 'core/entities/worker/worker.repository'
-import { DI_TOKENS } from 'infrastructure/libs/constants'
+import { DI_TOKENS } from 'infrastructure/config/constants'
 
 
 

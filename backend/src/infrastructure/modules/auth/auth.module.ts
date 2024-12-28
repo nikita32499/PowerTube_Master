@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { DI_TOKENS } from 'infrastructure/libs/constants'
+import { DI_TOKENS } from 'infrastructure/config/constants'
 import { AuthController } from 'infrastructure/modules/auth/controllers/RestAPI/auth.controller'
 import { AuthRepositoryImpl } from 'infrastructure/modules/auth/impl/AuthRepositoryImpl'
 import { NestAuthAdapter } from 'infrastructure/modules/auth/NestAuthAdapter'

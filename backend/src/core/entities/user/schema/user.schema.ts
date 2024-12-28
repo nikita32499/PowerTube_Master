@@ -2,7 +2,7 @@
 import { SchemaPayment } from 'core/entities/payment/schema/payment.schema'
 import { EnumSubscriptionStatus, } from 'core/entities/payment/types/payment.types'
 import { SchemaProxy } from 'core/entities/proxy/schema/proxy.schema'
-import { Exactly, ZodSafe } from 'core/lib/zod/zod'
+import { Exactly, ZodSafe } from 'core/helpers/zod/zod'
 import { z } from 'zod'
 import { EnumUserRole } from '../types/user.types'
 import { User, UserClient, UserJwtData } from '../user.entity'
@@ -18,7 +18,7 @@ export const SchemaUser = ZodSafe(
         role: z.nativeEnum(EnumUserRole),
         jwtVersion: z.number(),
         lastAt: z.union([z.number(), z.null()]),
-        createdAt: z.number(),
+        createdAt: z.date(),
         status: z.nativeEnum(EnumSubscriptionStatus),
         payments: SchemaPayment.array(),
         proxy: z.union([z.null(), SchemaProxy]),

@@ -13,12 +13,9 @@ import { PaymentMapper } from 'core/entities/payment/mapper/payment'
 import { Payment, PaymentClient } from 'core/entities/payment/payment.entity'
 import { EnumUserRole } from 'core/entities/user/types/user.types'
 import { Request } from 'express'
-import { GetUserId, SetPermissions } from 'infrastructure/libs/decorators/controller'
-import {
-    DtoPaymentArray,
-    DtoPaymentClient,
-    DtoPaymentStartRequest,
-} from '../../dto/payment.dto'
+import { GetUserId, SetPermissions } from 'infrastructure/common/decorators/controller'
+
+import { DtoPaymentArray, DtoPaymentClient, DtoPaymentStartRequest } from 'core/entities/payment/dto/payment.dto'
 import { NestPaymentAdapter } from '../../NestPaymentAdapter'
 
 @ApiTags('Payment')

@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { DI_TOKENS } from 'infrastructure/libs/constants'
+import { DI_TOKENS } from 'infrastructure/config/constants'
 import { UserController } from 'infrastructure/modules/user/controllers/RestAPI/user.controller'
 import { UserDB } from 'infrastructure/modules/user/db/user.typeorm'
 import { UserRepositoryImpl } from 'infrastructure/modules/user/impl/UserRepositoryImpl'

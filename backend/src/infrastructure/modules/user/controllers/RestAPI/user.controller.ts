@@ -2,9 +2,9 @@ import { Controller, Get, NotFoundException } from '@nestjs/common'
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger'
 import { UserMapper } from 'core/entities/user/mapper/user.mapper'
 import { EnumUserRole } from 'core/entities/user/types/user.types'
-import { GetUserId, SetPermissions } from 'infrastructure/libs/decorators/controller'
+import { GetUserId, SetPermissions } from 'infrastructure/common/decorators/controller'
 import { NestUserAdapter } from 'infrastructure/modules/user/NestUserAdapter'
-import { DtoUser, DtoUserClient } from '../../dto/user.dto'
+import { DtoUser, DtoUserClient } from '../../../../../core/entities/user/dto/user.dto'
 
 @ApiTags('User')
 @Controller('user')

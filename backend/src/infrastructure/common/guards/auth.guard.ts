@@ -6,7 +6,7 @@ import { Reflector } from '@nestjs/core'
 
 import { NestAuthAdapter } from 'infrastructure/modules/auth/NestAuthAdapter'
 import { NestUserAdapter } from 'infrastructure/modules/user/NestUserAdapter'
-import { Config } from '../config'
+import { Config } from '../../config/config'
 
 @Injectable()
 export class JwtAuthGuard implements CanActivate {
@@ -29,7 +29,7 @@ export class JwtAuthGuard implements CanActivate {
 
         if (roles.includes('public')) return true
 
-        const token: string | undefined = request.cookies['authorization']
+        const token: string | undefined = request.cookies['access_token']
 
         if (!token) return false
 

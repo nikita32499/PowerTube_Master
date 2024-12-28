@@ -16,7 +16,7 @@ export class User {
     role: EnumUserRole
     jwtVersion: number
     lastAt: number | null
-    createdAt: number
+    createdAt: Date
     status: EnumSubscriptionStatus
     payments: Payment[]
     proxy: Proxy | null
@@ -55,7 +55,7 @@ export class UserClient implements Pick<
     'id' | 'createdAt' | 'lastAt' | 'status' | 'payments' | 'proxy'
 > {
     id: string
-    createdAt: number
+    createdAt: Date
     lastAt: number | null
     status: EnumSubscriptionStatus
     payments: Payment[]

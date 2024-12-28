@@ -4,7 +4,7 @@ import {
     EnumPaymentCurrency,
     EnumSubscriptionPeriod,
 } from 'core/entities/payment/types/payment.types'
-import { Exactly, ZodSafe } from 'core/lib/zod/zod'
+import { Exactly, ZodSafe } from 'core/helpers/zod/zod'
 import { z } from 'zod'
 
 export const SchemaPaymentStartRequest = ZodSafe(

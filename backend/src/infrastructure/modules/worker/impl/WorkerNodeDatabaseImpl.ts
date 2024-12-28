@@ -1,15 +1,16 @@
 import { InjectRepository } from '@nestjs/typeorm'
 import { WorkerNode } from 'core/entities/worker/worker.entity'
 import { WorkerNodeDatabaseRepository } from 'core/entities/worker/worker.repository'
-import { TypeormLib } from 'infrastructure/libs/typeorm/typeorm.libs'
+import { TypeormLib } from 'infrastructure/common/helpers/typeorm/typeorm.libs'
 import { Repository } from 'typeorm'
 import { WorkerNodeDB } from '../db/worker.typeorm'
 
 
 
 
+
 export class WorkerNodeDatabaseImpl implements WorkerNodeDatabaseRepository {
-	constructor(@InjectRepository(WorkerNodeDB) private readonly workerNodeRepo: Repository<WorkerNode>) { }
+	constructor(@InjectRepository(WorkerNodeDB) private readonly workerNodeRepo: Repository<WorkerNodeDB>) { }
 	async getAll(): Promise<WorkerNode[]> {
 		return this.workerNodeRepo.find()
 	}

@@ -3,7 +3,7 @@ import * as bcrypt from 'bcrypt'
 import { AuthRepository } from 'core/entities/auth/auth.repository'
 import { SchemaUserJwtData } from 'core/entities/user/schema/user.schema'
 import { UserJwtData } from 'core/entities/user/user.entity'
-import { Config } from 'infrastructure/libs/config'
+import { Config } from 'infrastructure/config/config'
 import * as jwt from 'jsonwebtoken'
 
 @Injectable()

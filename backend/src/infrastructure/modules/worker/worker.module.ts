@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { DI_TOKENS } from 'infrastructure/libs/constants'
+import { DI_TOKENS } from 'infrastructure/config/constants'
 import { WorkerNodeDB } from './db/worker.typeorm'
-import { WorkerNodeDatabaseImpl } from './impl/WorkerNodeImpl'
+import { WorkerNodeDatabaseImpl } from './impl/WorkerNodeDatabaseImpl'
 import { NestWorkerAdapter } from './NestWorkerAdapter'
 
 

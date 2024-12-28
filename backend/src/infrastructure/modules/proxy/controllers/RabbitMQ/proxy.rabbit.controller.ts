@@ -1,5 +1,5 @@
 import { Controller } from '@nestjs/common'
-import { RmqService } from 'infrastructure/modules/rmq/rmq.service'
+import { RmqService } from 'infrastructure/common/modules/rmq/rmq.service'
 
 @Controller()
 export class ProxyRabbitController {

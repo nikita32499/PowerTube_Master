@@ -109,8 +109,8 @@ export class UserDB implements User {
     @Column({ type: 'bigint', nullable: true })
     lastAt!: number | null
 
-    @Column({ type: 'bigint' })
-    createdAt!: number
+    @Column({ type: 'timestamp' })
+    createdAt!: Date
 
     @Column({ type: 'enum', enum: EnumSubscriptionStatus })
     status!: EnumSubscriptionStatus
@@ -118,7 +118,7 @@ export class UserDB implements User {
     @Column({ type: 'boolean' })
     active!: boolean
 
-    @OneToMany(() => PaymentDB, payment => payment.user)
+    @OneToMany(() => PaymentDB, payment => payment.user, { eager: true })
     payments!: PaymentDB[]
 
     @OneToOne(() => ProxyDB)

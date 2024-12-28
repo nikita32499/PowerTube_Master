@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Payment } from 'core/entities/payment/payment.entity'
 import { PaymentDatabaseRepository } from 'core/entities/payment/payment.repository'
-import { TypeormLib } from 'infrastructure/libs/typeorm/typeorm.libs'
+import { TypeormLib } from 'infrastructure/common/helpers/typeorm/typeorm.libs'
 import { Repository } from 'typeorm'
 import { PaymentDB } from '../db/payment.typeorm'
 

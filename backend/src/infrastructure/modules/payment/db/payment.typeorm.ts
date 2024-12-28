@@ -22,8 +22,8 @@ export class PaymentDB implements Payment {
     @Column({ type: 'enum', enum: EnumPaymentStatus })
     status!: EnumPaymentStatus
 
-    @Column({ type: 'bigint' })
-    createdAt!: number
+    @Column({ type: 'timestamp' })
+    createdAt!: Date
 
     @Column({ type: 'jsonb' })
     method!: TPaymentMethod
