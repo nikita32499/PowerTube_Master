@@ -1,4 +1,4 @@
-import { TUserJwtData } from 'core/entities/user/types/user.entities'
+import { TUserJwtData } from 'powertube-shared'
 
 declare module 'express' {
     interface Request {

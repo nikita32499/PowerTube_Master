@@ -1,7 +1,7 @@
 import { applyDecorators, Post } from '@nestjs/common'
-import { ApiOkResponse } from '@nestjs/swagger'
-import { EnumUserRole } from 'core/entities/user/types/user.types'
-import { SetPermissions } from '../decorators/controller'
+import { ApiResponse } from '@nestjs/swagger'
+import { EnumUserRole } from 'powertube-shared'
+import { SetPermissions } from './controller'
 
 interface PostEndpointOptions {
 	description: string
@@ -13,7 +13,7 @@ interface PostEndpointOptions {
 export function PostEndpoint(options: PostEndpointOptions) {
 	return applyDecorators(
 		Post(options.path),
-		ApiOkResponse({
+		ApiResponse({
 			description: options.description,
 			type: options.type,
 			status: 201

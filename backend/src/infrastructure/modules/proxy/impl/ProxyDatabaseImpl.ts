@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { ProxyWorkerData } from 'core/entities/proxy/proxy.entity'
-import { ProxyDatabaseRepository } from 'core/entities/proxy/proxy.repository'
+import { ProxyDatabaseRepository } from 'core/repository/proxy.repository'
 import { TypeormLib } from 'infrastructure/common/helpers/typeorm/typeorm.libs'
+import { ProxyCredentials } from 'powertube-shared'
 import { Repository } from 'typeorm'
 import { ProxyDB } from '../db/proxy.typeorm'
 
@@ -13,7 +13,7 @@ export class ProxyDatabaseImpl implements ProxyDatabaseRepository {
 	constructor(@InjectRepository(ProxyDB) private readonly proxyDB: Repository<ProxyDB>) {
 
 	}
-	async saveProxy(proxy: ProxyWorkerData) {
+	async saveProxy(proxy: ProxyCredentials) {
 		return this.proxyDB.save(proxy)
 	}
 	async deleteProxyById(id: string) {
@@ -28,7 +28,7 @@ export class ProxyDatabaseImpl implements ProxyDatabaseRepository {
 		return proxy
 	}
 
-	async updateProxy(id: string, proxy: Partial<ProxyWorkerData>) {
+	async updateProxy(id: string, proxy: Partial<ProxyCredentials>) {
 		const result = await this.proxyDB.update(id, proxy)
 		return TypeormLib.isAffectedSuccess(result)
 	}

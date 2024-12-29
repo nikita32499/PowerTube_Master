@@ -1,8 +1,6 @@
-import { EnumSubscriptionStatus } from 'core/entities/payment/types/payment.types'
-import { EnumUserRole } from 'core/entities/user/types/user.types'
-import { User } from 'core/entities/user/user.entity'
 import { PaymentDB } from 'infrastructure/modules/payment/db/payment.typeorm'
 import { ProxyDB } from 'infrastructure/modules/proxy/db/proxy.typeorm'
+import { EnumSubscriptionStatus, EnumUserRole, User } from 'powertube-shared'
 import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
 
 
@@ -106,10 +104,10 @@ export class UserDB implements User {
     @Column({ type: 'int' })
     jwtVersion!: number
 
-    @Column({ type: 'bigint', nullable: true })
-    lastAt!: number | null
+    @Column({ type: 'timestamp', nullable: true })
+    lastAt!: Date | null
 
-    @Column({ type: 'timestamp' })
+    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     createdAt!: Date
 
     @Column({ type: 'enum', enum: EnumSubscriptionStatus })

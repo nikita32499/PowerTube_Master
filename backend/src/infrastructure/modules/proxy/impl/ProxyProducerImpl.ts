@@ -1,32 +1,31 @@
 import { Injectable } from '@nestjs/common'
-import { ProxyWorkerData } from 'core/entities/proxy/proxy.entity'
-import { ProxySocketWorkerRepository } from 'core/entities/proxy/proxy.repository'
-import { SchemaProxyWorkerData } from 'core/entities/proxy/schema/proxy.schema'
+import { ProxyProducerRepository } from 'core/repository/proxy.repository'
 import { RmqService } from 'infrastructure/common/modules/rmq/rmq.service'
+import { ProxyCredentials, SchemaProxyCredentials } from 'powertube-shared'
 import { z } from 'zod'
 
 @Injectable()
-export class ProxySocketWorkerImpl implements ProxySocketWorkerRepository {
+export class ProxyProducerImpl implements ProxyProducerRepository {
 	constructor(private readonly rmqService: RmqService) { }
 
-	async createProxy(host: string): Promise<ProxyWorkerData> {
+	async createProxy(host: string): Promise<ProxyCredentials> {
 		const result = await this.rmqService.sendMessageAndReply({
 			queueName: host,
 			pattern: 'createProxy',
 			replyQueueName: 'master',
 			data: {},
-			schema: SchemaProxyWorkerData,
+			schema: SchemaProxyCredentials,
 		})
 		return result
 	}
 
-	async getAllProxy(host: string): Promise<ProxyWorkerData[]> {
+	async getAllProxy(host: string): Promise<ProxyCredentials[]> {
 		const result = await this.rmqService.sendMessageAndReply({
 			queueName: host,
 			pattern: 'getAllProxy',
 			replyQueueName: 'master',
 			data: {},
-			schema: SchemaProxyWorkerData.array(),
+			schema: z.array(SchemaProxyCredentials),
 		})
 		return result
 	}

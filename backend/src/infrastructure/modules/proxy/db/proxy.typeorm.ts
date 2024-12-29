@@ -1,9 +1,8 @@
 // import { EnumProxyType, TProxy } from 'shared-vpn-master';
 // import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-import { Proxy } from 'core/entities/proxy/proxy.entity'
-import { EnumProxyType } from 'core/entities/proxy/types/proxy.types'
 import { UserDB } from 'infrastructure/modules/user/db/user.typeorm'
+import { EnumProxyType, Proxy } from 'powertube-shared'
 import { Column, Entity, Index, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
 
 // export const ProxyDB = new EntitySchema<Proxy>({

@@ -12,7 +12,7 @@ declare global {
     } & {}
 
 
-
+    type Entity<T extends object, Keys extends keyof T = never> = Omit<T, 'id' | 'createdAt' | 'updatedAt' | Keys>
 
 
     type SerializableObject = {
@@ -21,4 +21,3 @@ declare global {
 }
 
 export { }
-

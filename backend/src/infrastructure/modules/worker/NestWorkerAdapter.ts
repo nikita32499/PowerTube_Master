@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common'
-import { WorkerNode } from 'core/entities/worker/worker.entity'
-import { WorkerNodeDatabaseRepository } from 'core/entities/worker/worker.repository'
+import { WorkerNodeDatabaseRepository } from 'core/repository/worker.repository'
 import { DI_TOKENS } from 'infrastructure/config/constants'
+import { WorkerNode, WorkerNodeData, WorkerNodeFactory, WorkerNodeParameters } from 'powertube-shared'
 
 
 
@@ -27,16 +27,29 @@ export class NestWorkerAdapter {
 
 		return bestWorkerNode
 	}
-
-
-	async getWorkerNodeByIp(ip: string): Promise<WorkerNode> {
-		return this.workerNodeDatabase.getByIp(ip)
+	async getWorkerNodeByHost(host: string): Promise<WorkerNode> {
+		return this.workerNodeDatabase.getByHost(host)
 	}
 
 
 
-	async createWorkerNode(workerNode: WorkerNode): Promise<WorkerNode> {
-		return this.workerNodeDatabase.create(workerNode)
+	getInitParameters(): WorkerNodeParameters {
+		return {
+			maxConnections: 10,
+			incomingSpeed: 1000,
+			outgoingSpeed: 1000,
+			ssl: true,
+		}
+	}
+
+
+	async createWorkerNode(workerNode: WorkerNodeData): Promise<WorkerNode> {
+
+
+		const workerNodeEntity = WorkerNodeFactory.createWorkerNodeEntity(workerNode.host, this.getInitParameters())
+
+
+		return this.workerNodeDatabase.create(workerNodeEntity)
 	}
 
 

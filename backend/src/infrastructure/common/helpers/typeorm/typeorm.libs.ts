@@ -1,4 +1,7 @@
+import { applyDecorators } from '@nestjs/common'
 import {
+    Column,
+    ColumnOptions,
     EntitySchema,
     EntitySchemaColumnOptions,
     EntitySchemaEmbeddedColumnOptions,
@@ -20,6 +23,17 @@ export class TypeormLib {
             return data
         }
     };
+
+
+    static ColumnJsonbValidator = <Schema extends ZodSchema>(schema: Schema, options?: ColumnOptions) => {
+        return applyDecorators(
+            Column("jsonb", {
+
+                ...options,
+                transformer: new this.JsonbValidator(schema),
+            })
+        )
+    }
 
 
 

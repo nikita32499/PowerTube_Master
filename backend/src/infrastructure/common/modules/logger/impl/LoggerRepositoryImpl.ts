@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { LoggerRepository } from 'core/entities/logger/logger.repository'
+import { LoggerRepository } from 'core/repository/logger.repository'
 import winston from 'winston'
 
 @Injectable()

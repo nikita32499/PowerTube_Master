@@ -4,7 +4,7 @@ export const DI_TOKENS = {
     },
     PROXY: {
         DATABASE: Symbol('PROXY_DATABASE'),
-        SOCKET_WORKER: Symbol('PROXY_SOCKET_WORKER'),
+        PRODUCER: Symbol('PROXY_PRODUCER'),
         CHECK: Symbol('PROXY_CHECK_REPOSITORY'),
     },
     UserDatabaseRepository: Symbol('UserDatabaseRepository'),

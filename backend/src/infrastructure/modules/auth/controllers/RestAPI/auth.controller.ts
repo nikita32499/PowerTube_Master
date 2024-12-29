@@ -1,13 +1,10 @@
 import { Body, Controller, Res } from '@nestjs/common'
 import { ApiTags } from '@nestjs/swagger'
-import { DtoUserClient } from 'core/entities/user/dto/user.dto'
-import { UserMapper } from 'core/entities/user/mapper/user.mapper'
-import { User } from 'core/entities/user/user.entity'
 import { Response } from 'express'
 import { BaseController } from 'infrastructure/common/controller/BaseController'
-import { PostEndpoint } from 'infrastructure/common/controller/MethodsHTTP'
+import { PostEndpoint } from 'infrastructure/common/decorators/MethodsHTTP'
 import { NestAuthAdapter } from 'infrastructure/modules/auth/NestAuthAdapter'
-import { DtoAuthLogin, DtoAuthRegisterWithPassword } from '../../../../../core/entities/auth/dto/auth.dto'
+import { DtoAuthLogin, DtoAuthRegisterWithPassword, DtoUserClient, User, UserMapper } from 'powertube-shared'
 
 @ApiTags('Auth')
 @Controller('auth')

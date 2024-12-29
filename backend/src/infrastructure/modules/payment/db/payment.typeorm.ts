@@ -1,11 +1,9 @@
-import { Payment } from 'core/entities/payment/payment.entity'
+import { UserDB } from 'infrastructure/modules/user/db/user.typeorm'
 import {
     EnumPaymentStatus,
-    EnumSubscriptionPeriod,
-    TPaymentMethod,
+    EnumSubscriptionPeriod, Payment, TPaymentMethod,
     TSubscriptionTariff
-} from 'core/entities/payment/types/payment.types'
-import { UserDB } from 'infrastructure/modules/user/db/user.typeorm'
+} from 'powertube-shared'
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
 
 @Entity('payment')

@@ -1,10 +1,10 @@
 import { Controller } from '@nestjs/common'
 import { ApiTags } from '@nestjs/swagger'
-import { EnumUserRole } from 'core/entities/user/types/user.types'
-import { PostEndpoint } from 'infrastructure/common/controller/MethodsHTTP'
+import { PostEndpoint } from 'infrastructure/common/decorators/MethodsHTTP'
 import { GetUserId } from 'infrastructure/common/decorators/controller'
+import { EnumUserRole } from 'powertube-shared'
 
-import { DtoProxy } from 'core/entities/proxy/dto/proxy.dto'
+import { DtoProxy } from 'powertube-shared'
 import { NestProxyAdapter } from '../../NestProxyAdapter'
 
 

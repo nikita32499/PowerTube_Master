@@ -1,10 +1,8 @@
 import { Controller, Get, NotFoundException } from '@nestjs/common'
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger'
-import { UserMapper } from 'core/entities/user/mapper/user.mapper'
-import { EnumUserRole } from 'core/entities/user/types/user.types'
 import { GetUserId, SetPermissions } from 'infrastructure/common/decorators/controller'
 import { NestUserAdapter } from 'infrastructure/modules/user/NestUserAdapter'
-import { DtoUser, DtoUserClient } from '../../../../../core/entities/user/dto/user.dto'
+import { DtoUser, DtoUserClient, EnumUserRole, UserMapper } from 'powertube-shared'
 
 @ApiTags('User')
 @Controller('user')

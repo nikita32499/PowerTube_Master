@@ -63,6 +63,8 @@ services:
                 - node_modules
                 - dist
                 - .vscode
+        volumes:
+            - "/shared/Powertube_shared:/shared/Powertube_shared:ro"
     master-rabbitmq:
         container_name: powertube_master_rabbitmq_dev
         image: rabbitmq:3-management

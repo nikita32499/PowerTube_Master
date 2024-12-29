@@ -9,7 +9,7 @@ import { ProxyRestController } from './controllers/RestApi/proxy.controller'
 import { ProxyDB } from './db/proxy.typeorm'
 import { ProxyCheckImpl } from './impl/ProxyCheckImpl'
 import { ProxyDatabaseImpl } from './impl/ProxyDatabaseImpl'
-import { ProxySocketWorkerImpl } from './impl/ProxySocketWorkerImpl'
+import { ProxyProducerImpl } from './impl/ProxyProducerImpl'
 import { NestProxyAdapter } from './NestProxyAdapter'
 
 
@@ -33,8 +33,8 @@ import { NestProxyAdapter } from './NestProxyAdapter'
 			useClass: ProxyDatabaseImpl,
 		},
 		{
-			provide: DI_TOKENS.PROXY.SOCKET_WORKER,
-			useClass: ProxySocketWorkerImpl,
+			provide: DI_TOKENS.PROXY.PRODUCER,
+			useClass: ProxyProducerImpl,
 		},
 		{
 			provide: DI_TOKENS.PROXY.CHECK,

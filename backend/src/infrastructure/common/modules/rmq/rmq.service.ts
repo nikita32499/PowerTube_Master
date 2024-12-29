@@ -2,7 +2,7 @@ import { Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common'
 import { RmqContext, RmqOptions, Transport } from '@nestjs/microservices'
 import * as amqp from 'amqplib'
 import { Config } from 'infrastructure/config/config'
-import { z, ZodSchema } from 'zod'
+import { z } from 'zod'
 
 @Injectable()
 export class RmqService implements OnModuleDestroy, OnModuleInit {
@@ -54,7 +54,7 @@ export class RmqService implements OnModuleDestroy, OnModuleInit {
 		console.log(`Message sent to queue ${queueName} with routing key ${routingKey}`)
 	}
 
-	async sendMessageAndReply<S extends ZodSchema>({
+	async sendMessageAndReply<S extends z.ZodSchema>({
 		queueName, replyQueueName, data, schema,
 		routingKey = undefined,
 		timeout_sec = 30,

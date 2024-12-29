@@ -9,13 +9,11 @@ import {
     ValidationPipe,
 } from '@nestjs/common'
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger'
-import { PaymentMapper } from 'core/entities/payment/mapper/payment'
-import { Payment, PaymentClient } from 'core/entities/payment/payment.entity'
-import { EnumUserRole } from 'core/entities/user/types/user.types'
 import { Request } from 'express'
 import { GetUserId, SetPermissions } from 'infrastructure/common/decorators/controller'
+import { DtoPaymentData, EnumUserRole, Payment, PaymentClient, PaymentMapper } from 'powertube-shared'
 
-import { DtoPaymentArray, DtoPaymentClient, DtoPaymentStartRequest } from 'core/entities/payment/dto/payment.dto'
+import { DtoPaymentArray, DtoPaymentClient } from 'powertube-shared'
 import { NestPaymentAdapter } from '../../NestPaymentAdapter'
 
 @ApiTags('Payment')
@@ -39,7 +37,7 @@ export class PaymentController {
     })
     @SetPermissions(EnumUserRole.USER)
     @Post('startPayment')
-    async startPayment(@Body() data: DtoPaymentStartRequest) {
+    async startPayment(@Body() data: DtoPaymentData) {
         const payment = await this.paymentService.startPayment(data)
 
         return PaymentMapper.toClientFormat(payment)

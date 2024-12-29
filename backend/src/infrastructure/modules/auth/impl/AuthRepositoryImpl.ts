@@ -1,10 +1,9 @@
 import { Injectable } from '@nestjs/common'
 import * as bcrypt from 'bcrypt'
-import { AuthRepository } from 'core/entities/auth/auth.repository'
-import { SchemaUserJwtData } from 'core/entities/user/schema/user.schema'
-import { UserJwtData } from 'core/entities/user/user.entity'
+import { AuthRepository } from 'core/repository/auth.repository'
 import { Config } from 'infrastructure/config/config'
 import * as jwt from 'jsonwebtoken'
+import { SchemaUserJwtData, UserJwtData } from 'powertube-shared'
 
 @Injectable()
 export class AuthRepositoryImpl implements AuthRepository {

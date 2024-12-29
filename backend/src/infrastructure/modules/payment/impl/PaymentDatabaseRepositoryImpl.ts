@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { Payment } from 'core/entities/payment/payment.entity'
-import { PaymentDatabaseRepository } from 'core/entities/payment/payment.repository'
+import { PaymentDatabaseRepository } from 'core/repository/payment.repository'
 import { TypeormLib } from 'infrastructure/common/helpers/typeorm/typeorm.libs'
+import { Payment } from 'powertube-shared'
 import { Repository } from 'typeorm'
 import { PaymentDB } from '../db/payment.typeorm'
 

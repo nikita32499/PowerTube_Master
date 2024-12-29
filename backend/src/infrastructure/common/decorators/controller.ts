@@ -4,8 +4,8 @@ import {
     SetMetadata,
     UnauthorizedException,
 } from '@nestjs/common'
-import { EnumUserRole } from 'core/entities/user/types/user.types'
 import { Request } from 'express'
+import { EnumUserRole } from 'powertube-shared'
 
 export const SetPermissions = (...roles: (EnumUserRole | 'public')[]) =>
     SetMetadata('roles', roles)

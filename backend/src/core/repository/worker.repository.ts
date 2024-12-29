@@ -1,4 +1,4 @@
-import { WorkerNode } from 'core/entities/worker/worker.entity'
+import { WorkerNode } from "powertube-shared"
 
 
 export interface TWorkerNodeService {
@@ -26,17 +26,19 @@ export interface WorkerNodeDatabaseRepository {
 
     getAll(): Promise<WorkerNode[]>
 
-    getByIp(ip: string): Promise<WorkerNode>
+    getByHost(host: string): Promise<WorkerNode>
 
 
-    getByID(ip: string): Promise<WorkerNode>
+    getByID(id: string): Promise<WorkerNode>
 
-    create(workerNode: WorkerNode): Promise<WorkerNode>
+    create(workerNode: Entity<WorkerNode, "rating" | "lastConnectionAt">): Promise<WorkerNode>
 
     update(id: string, workerNode: Partial<WorkerNode>): Promise<boolean>
 }
 
 
-export interface WorkerNodeSocketRepository {
-    (ip: string): Promise<WorkerNode>
+export interface WorkerNodeProducerRepository {
+    confirmWorkerNodeConnection(host: string): Promise<boolean>
+
+    disconnectWorkerNode(host: string): Promise<boolean>
 }

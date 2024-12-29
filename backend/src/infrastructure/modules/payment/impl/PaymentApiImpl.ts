@@ -1,18 +1,17 @@
-import { PaymentApiRepository } from 'core/entities/payment/payment.repository'
-import { EnumPaymentStatus } from 'core/entities/payment/types/payment.types'
+import { PaymentApiRepository } from 'core/repository/payment.repository'
+import { EnumPaymentStatus, PaymentData } from 'powertube-shared'
 
 export class PaymentApiImpl implements PaymentApiRepository {
-    initializePayment: PaymentApiRepository['initializePayment'] = async (payment) => {
-        return payment
-    };
+    initializePayment = async (payment: PaymentData) => {
+        throw new Error('Not implemented', { cause: payment.userId })
+    }
 
-    checkPayment: PaymentApiRepository['checkPayment'] = async (id) => {
+    checkPayment = async (id: string) => {
         console.log('checkPayment', id)
         return EnumPaymentStatus.PENDING
-    };
+    }
 
-    cancelPayment: PaymentApiRepository['cancelPayment'] = async (id) => {
-        console.log('checkPayment', id)
-        return true
-    };
+    cancelPayment = async (id: string) => {
+        throw new Error('Not implemented', { cause: id })
+    }
 }

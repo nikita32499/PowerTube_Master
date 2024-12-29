@@ -1,11 +1,10 @@
-import { ProxyWorkerData, TProxyDiagnosticData } from 'core/entities/proxy/proxy.entity'
-import { ProxyCheckRepository } from 'core/entities/proxy/proxy.repository'
-import { EnumProxyStatus } from 'core/entities/proxy/types/proxy.types'
+import { ProxyCheckRepository } from 'core/repository/proxy.repository'
+import { EnumProxyStatus, ProxyCredentials, TProxyDiagnosticData } from 'powertube-shared'
 
 import { Injectable } from '@nestjs/common'
 import axios, { AxiosResponse } from 'axios'
-import { SchemaGetConnectDataProxyResponse } from 'core/entities/proxy/schema/proxy.schema'
 import { HttpsProxyAgent } from 'https-proxy-agent'
+import { SchemaGetConnectDataProxyResponse } from 'powertube-shared'
 
 
 @Injectable()
@@ -14,7 +13,7 @@ export class ProxyCheckImpl implements ProxyCheckRepository {
 
 	}
 
-	async getConnectDataProxy(proxy: ProxyWorkerData): Promise<TProxyDiagnosticData> {
+	async getConnectDataProxy(proxy: ProxyCredentials): Promise<TProxyDiagnosticData> {
 		const startTime = Date.now()
 		let response: AxiosResponse<unknown> | undefined = undefined
 		let errorMessage: string | null = null

@@ -1,10 +1,8 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { TUserCreate } from 'core/entities/user/types/user.operations'
-import { EnumUserRole } from 'core/entities/user/types/user.types'
-import { User } from 'core/entities/user/user.entity'
-import { UserDatabaseRepository } from 'core/entities/user/user.repository'
+import { UserDatabaseRepository } from 'core/repository/user.repository'
 import { TypeormLib } from 'infrastructure/common/helpers/typeorm/typeorm.libs'
+import { EnumUserRole, User } from 'powertube-shared'
 import { Repository } from 'typeorm'
 import { UserDB } from '../db/user.typeorm'
 import { UserMapper } from '../mapper/UserMapper'
@@ -30,7 +28,7 @@ export class UserRepositoryImpl implements UserDatabaseRepository {
         const result = await this.userDB.update(id, update)
         return TypeormLib.isAffectedSuccess(result)
     }
-    async create(data: TUserCreate['Entity']): Promise<User> {
+    async create(data: Entity<User>): Promise<User> {
         const newUserData = await this.userDB.create(data)
 
         const newUser = await this.userDB.save(newUserData)

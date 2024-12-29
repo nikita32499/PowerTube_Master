@@ -1,4 +1,4 @@
-import { User } from 'core/entities/user/user.entity'
+import { User } from 'powertube-shared'
 
 export class UserMapper {
     static toEntity = (user: User) => {
